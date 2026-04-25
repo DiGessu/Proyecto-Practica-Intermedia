@@ -29,6 +29,7 @@ public class ToothDirtMask : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Material eraseMaterial;
     private Texture2D brushTexture;
+    private float alphaValue = 1f;
 
     // Para calcular el progreso de limpieza
     private Texture2D readbackTexture;
@@ -224,5 +225,13 @@ public class ToothDirtMask : MonoBehaviour
     {
         if (maskTexture != null)
             maskTexture.Release();
+    }
+
+    public void ClearTooth()
+    {
+        Color c = spriteRenderer.color;
+        c.a -= 0.05f;
+        print(c.a);
+        spriteRenderer.color = c;
     }
 }

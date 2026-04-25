@@ -18,7 +18,7 @@ public class ToothBrush : MonoBehaviour
     public Vector2 brushOffset = new Vector2(0f, 0.5f);
 
     [Tooltip("¿Rotar el cepillo según la dirección de movimiento?")]
-    public bool rotateToBrushDirection = true;
+    public bool rotateToBrushDirection = false;
 
     [Header("Referencia al diente")]
     [Tooltip("Arrastra aquí el GameObject del diente sucio (el que tiene ToothDirtMask)")]
@@ -173,5 +173,14 @@ public class ToothBrush : MonoBehaviour
         // Mostrar el área de contacto en el editor
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere((Vector2)transform.position - brushOffset, 0.1f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<ToothDirtMask>())
+        {
+            
+            collision.gameObject.GetComponent<ToothDirtMask>().ClearTooth();
+        }
     }
 }
