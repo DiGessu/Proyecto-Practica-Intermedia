@@ -4,51 +4,53 @@ using UnityEngine;
 /// Coloca este script en el GameObject del CEPILLO DE DIENTES.
 /// El cepillo sigue al mouse/touch y borra la suciedad del diente al pasar encima.
 /// </summary>
+// Controla el comportamiento del cepillo: movimiento, sonido, partículas y limpieza del diente
 public class ToothBrush : MonoBehaviour
 {
     [Header("Configuración del cepillo")]
-    [Tooltip("Velocidad con que el cepillo sigue al cursor (más alto = más inmediato)")]
-    [Range(5f, 30f)]
-    public float followSpeed = 15f;
+    // Velocidad de suavizado para que el cepillo no se mueva bruscamente
+    [Range(5f, 30f)] public float followSpeed = 15f;
 
-    [Tooltip("¿El cepillo sigue al mouse? (false = tú mueves el cepillo por código o animación)")]
+    // Determina si el script debe leer la posición del mouse automáticamente
     public bool followMouse = true;
 
-    [Tooltip("Offset visual del cepillo respecto al punto de contacto")]
+    // Ajusta la posición visual del cepillo para que no tape exactamente el punto de limpieza
     public Vector2 brushOffset = new Vector2(0f, 0.5f);
 
-    [Tooltip("¿Rotar el cepillo según la dirección de movimiento?")]
+    // Si es true, el cepillo girará mirando hacia donde se mueve el mouse
     public bool rotateToBrushDirection = false;
 
     [Header("Referencia al diente")]
-    [Tooltip("Arrastra aquí el GameObject del diente sucio (el que tiene ToothDirtMask)")]
+    // Referencia al script que maneja la suciedad (la lógica de "borrar" la mancha)
     public ToothDirtMask toothMask;
 
     [Header("Efectos")]
-    [Tooltip("Partículas de espuma al cepillar (opcional)")]
+    // Sistema de partículas para simular burbujas o espuma de pasta
     public ParticleSystem foamParticles;
 
-    [Tooltip("AudioClip del sonido de cepillado (opcional)")]
+    // Sonido de cepillado
     public AudioClip brushSound;
 
+    // Variables internas de control
     private Camera mainCamera;
     private AudioSource audioSource;
     private Vector2 lastPosition;
     private bool isBrushing = false;
-    private Vector2 currentVelocity;
+    private Vector2 currentVelocity; // Usada por SmoothDamp para el movimiento suave
 
-    // Para animar el cepillo con efecto de "cepillado" (oscilación)
     private float brushAnimTime = 0f;
     [Header("Animación de cepillado")]
-    [Tooltip("Amplitud del movimiento de cepillado automático")]
+    // Qué tanto se mueve el cepillo de lado a lado al limpiar
     public float brushAnimAmplitude = 0.05f;
-    [Tooltip("Velocidad del movimiento de cepillado")]
+    // Qué tan rápido vibra el cepillo
     public float brushAnimSpeed = 8f;
 
     void Awake()
     {
         mainCamera = Camera.main;
         audioSource = GetComponent<AudioSource>();
+
+        // Si no hay AudioSource pero sí hay un sonido asignado, lo crea automáticamente
         if (audioSource == null && brushSound != null)
             audioSource = gameObject.AddComponent<AudioSource>();
 
@@ -57,34 +59,35 @@ public class ToothBrush : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
-        HandleBrushing();
-        HandleAnimation();
+        HandleInput();      // Paso 1: Leer entrada del usuario (Mouse/Touch)
+        HandleBrushing();   // Paso 2: Procesar la limpieza y efectos
+        HandleAnimation();  // Paso 3: Aplicar vibración visual
     }
 
+    // Gestiona el movimiento del cepillo siguiendo al puntero
     void HandleInput()
     {
         if (!followMouse) return;
 
         Vector2 targetPos = Vector2.zero;
 
-        // Soporte mouse y touch
+        // Soporte para pantallas táctiles (Móviles)
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             targetPos = mainCamera.ScreenToWorldPoint(touch.position);
             isBrushing = (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary);
         }
+        // Soporte para Mouse (PC)
         else
         {
             targetPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            isBrushing = Input.GetMouseButton(0);
+            isBrushing = Input.GetMouseButton(0); // True si el clic está presionado
         }
 
-        // Aplicar offset
-        targetPos += brushOffset;
+        targetPos += brushOffset; // Aplica el desfase visual configurado
 
-        // Mover el cepillo suavemente hacia la posición del cursor
+        // Mueve el objeto hacia targetPos con un retraso suave para que se sienta orgánico
         Vector2 newPos = Vector2.SmoothDamp(
             transform.position,
             targetPos,
@@ -92,7 +95,7 @@ public class ToothBrush : MonoBehaviour
             1f / followSpeed
         );
 
-        // Rotar según dirección de movimiento
+        // Calcula la rotación basada en la dirección del movimiento
         if (rotateToBrushDirection)
         {
             Vector2 dir = newPos - (Vector2)transform.position;
@@ -111,20 +114,22 @@ public class ToothBrush : MonoBehaviour
         transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
     }
 
+    // Gestiona la lógica de limpieza y activa los efectos visuales/auditivos
     void HandleBrushing()
     {
         if (!isBrushing || toothMask == null) return;
 
-        // Punto de contacto del cepillo (sin el offset visual)
+        // Calcula el punto exacto donde las cerdas tocan el diente (restando el offset)
         Vector2 contactPoint = (Vector2)transform.position - brushOffset;
 
-        // Borrar en la máscara del diente
+        // Llama al script del diente para borrar la suciedad en esa posición
         toothMask.EraseAt(contactPoint);
 
-        // Efectos opcionales
+        // Activa la espuma si no se está reproduciendo
         if (foamParticles != null && !foamParticles.isPlaying)
             foamParticles.Play();
 
+        // Activa el sonido en bucle mientras se cepilla
         if (audioSource != null && brushSound != null && !audioSource.isPlaying)
         {
             audioSource.clip = brushSound;
@@ -133,34 +138,27 @@ public class ToothBrush : MonoBehaviour
         }
     }
 
+    // Aplica una pequeña vibración (senoidal) para que el cepillo parezca estar limpiando de verdad
     void HandleAnimation()
     {
-        // Si el cepillo se está usando y tiene animación activa
         if (isBrushing && brushAnimAmplitude > 0)
         {
             brushAnimTime += Time.deltaTime * brushAnimSpeed;
-            // Pequeña oscilación lateral que simula el movimiento de cepillado
+            // Calcula un desplazamiento oscilatorio en el eje X
             float sideOffset = Mathf.Sin(brushAnimTime) * brushAnimAmplitude;
             transform.position += new Vector3(sideOffset * Time.deltaTime, 0, 0);
         }
 
-        // Detener efectos cuando no se cepilla
+        // Si el usuario suelta el clic, detiene todos los efectos
         if (!isBrushing)
         {
             brushAnimTime = 0f;
-
-            if (foamParticles != null && foamParticles.isPlaying)
-                foamParticles.Stop();
-
-            if (audioSource != null && audioSource.isPlaying)
-                audioSource.Stop();
+            if (foamParticles != null && foamParticles.isPlaying) foamParticles.Stop();
+            if (audioSource != null && audioSource.isPlaying) audioSource.Stop();
         }
     }
 
-    /// <summary>
-    /// Llama este método si controlas el cepillo desde otro script
-    /// (por ejemplo, con animaciones o botones en lugar del mouse).
-    /// </summary>
+    // Permite que otros scripts (como una cinemática) controlen el cepillo manualmente
     public void BrushAt(Vector2 worldPosition, bool brushing)
     {
         isBrushing = brushing;
@@ -168,18 +166,18 @@ public class ToothBrush : MonoBehaviour
             toothMask.EraseAt(worldPosition);
     }
 
+    // Dibuja un círculo en el editor de Unity para visualizar el punto de contacto
     void OnDrawGizmosSelected()
     {
-        // Mostrar el área de contacto en el editor
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere((Vector2)transform.position - brushOffset, 0.1f);
     }
 
+    // Si el cepillo toca un objeto con el script ToothDirtMask, limpia el diente por completo (limpieza total)
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<ToothDirtMask>())
         {
-            
             collision.gameObject.GetComponent<ToothDirtMask>().ClearTooth();
         }
     }
