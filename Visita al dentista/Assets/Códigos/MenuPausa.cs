@@ -21,6 +21,6 @@ public class MenuPausa : MonoBehaviour
     public void Inicio()
     {
         Time.timeScale = 1f; // ¡OJO! Siempre resetea el tiempo antes de cambiar de escena
-        SceneManager.LoadScene("Menu Principal");
+        SceneManager.LoadScene("Pantalla inicio");
     }
 }
