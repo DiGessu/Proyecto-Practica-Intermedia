@@ -10,12 +10,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Teeth
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Cavity
+  - Tool_Brush
+  - Tool_Cotton
   - 
   - 
   - 
@@ -48,3 +48,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - Teeth

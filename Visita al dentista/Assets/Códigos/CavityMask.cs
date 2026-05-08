@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class CavityMask : MonoBehaviour
 {
-    // mismo sistema que ToothDirtMask
-
-    public System.Action OnCavityCleaned;
-
-    public void EraseAt(Vector2 worldPos)
+    public void EraseAt(Vector2 position)
     {
-        // igual que el del diente
+        // Aquí va tu lógica para borrar la carie
+        // puede ser textura, máscara o sprite
+        Debug.Log("Quitando carie en: " + position);
+    }
+
+    public void ClearCavity()
+    {
+        gameObject.SetActive(false);
     }
 }
