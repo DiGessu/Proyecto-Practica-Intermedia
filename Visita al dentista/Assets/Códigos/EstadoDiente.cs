@@ -1,13 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public enum TipoEstado
 {
-    Limpio,
-    Sucio,
-    Sarro,
-    Carie
+    LIMPIO,
+    SUCIO,
+    SARRO,
+    CARIE
 }
 
 
@@ -25,6 +26,26 @@ public class EstadoDiente : MonoBehaviour
     public Sprite spriteCarie;
 
 
+    public static event Action OnDienteLimpiado;
+
+
+    public void LimpiarDiente()
+    {
+        estadoActual = TipoEstado.LIMPIO;
+        imagenDiente.sprite = spriteLimpio;
+        OnDienteLimpiado?.Invoke();
+    }
+
+    public void EnsuciarDiente(TipoEstado newTipo)
+    {
+        switch (estadoActual)
+        {
+            case TipoEstado.LIMPIO: estadoActual = TipoEstado.SUCIO; imagenDiente.sprite = spriteSucio; break;
+            case TipoEstado.SUCIO: estadoActual = TipoEstado.SARRO; imagenDiente.sprite = spriteSarro; break;
+            case TipoEstado.SARRO: estadoActual = TipoEstado.CARIE; imagenDiente.sprite = spriteCarie; break;
+        }
+    }
+
     private void Awake()
     {
         if (imagenDiente == null) imagenDiente = GetComponent<Image>();
@@ -32,24 +53,6 @@ public class EstadoDiente : MonoBehaviour
 
     private void Start()
     {
-        imagenDiente.sprite = spriteLimpio;
-    }
-
-
-    public void EnsuciarDiente(TipoEstado newTipo)
-    {
-
-        switch (estadoActual)
-        {
-            case TipoEstado.Limpio:estadoActual = TipoEstado.Sucio; imagenDiente.sprite = spriteSucio; break;
-            case TipoEstado.Sucio: estadoActual = TipoEstado.Sarro; imagenDiente.sprite = spriteSarro; break;
-            case TipoEstado.Sarro: estadoActual = TipoEstado.Carie; imagenDiente.sprite = spriteCarie; break;
-        }
-    }
-
-    public void LimpiarDiente()
-    {
-        estadoActual =  TipoEstado.Limpio; 
         imagenDiente.sprite = spriteLimpio;
     }
 }
