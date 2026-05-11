@@ -4,8 +4,8 @@ public class CavityMask : MonoBehaviour
 {
     public void EraseAt(Vector2 position)
     {
-        // Aquí va tu lógica para borrar la carie
-        // puede ser textura, máscara o sprite
+        // Aqui esta la logica para borrar la carie
+        // Sera en este caso con el sprite
         Debug.Log("Quitando carie en: " + position);
     }
 

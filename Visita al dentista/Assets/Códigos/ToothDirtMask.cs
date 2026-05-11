@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 
-
-
 public class ToothDirtMask : MonoBehaviour
-
 {
 
     [Header("Configuración de la máscara")]
@@ -63,6 +60,13 @@ public class ToothDirtMask : MonoBehaviour
     private float cleanPercent = 0f;
 
 
+    [Header("Respawn del diente")]
+
+    public float respawnTime = 10f;
+
+    private bool isRespawning = false;
+
+
 
     // Evento que se dispara cuando el diente queda limpio
 
@@ -78,8 +82,15 @@ public class ToothDirtMask : MonoBehaviour
 
         InitializeMask();
 
+        OnToothCleaned += HandleToothCleaned;
+
     }
 
+    void HandleToothCleaned()
+    {
+        if (!isRespawning)
+            StartCoroutine(RespawnTooth());
+    }
 
 
     void InitializeMask()
@@ -344,6 +355,8 @@ public class ToothDirtMask : MonoBehaviour
 
     float nextCheckTime = 0f;
 
+    public float AlphaValue { get => alphaValue; set => alphaValue = value; }
+
     void Update()
 
     {
@@ -422,12 +435,9 @@ public class ToothDirtMask : MonoBehaviour
 
         // Disparar evento si el diente está suficientemente limpio
 
-        if (cleanPercent >= cleanThreshold)
-
+        if (cleanPercent >= cleanThreshold && !isRespawning)
         {
-
             OnToothCleaned?.Invoke();
-
         }
 
     }
@@ -458,6 +468,28 @@ public class ToothDirtMask : MonoBehaviour
 
         spriteRenderer.color = c;
 
+    }
+
+    System.Collections.IEnumerator RespawnTooth()
+    {
+        isRespawning = true;
+
+        // Ocultar el diente
+        spriteRenderer.enabled = false;
+
+        // Esperar 10 segundos
+        yield return new WaitForSeconds(respawnTime);
+
+        // Restaurar la máscara (diente sucio otra vez)
+        Graphics.Blit(Texture2D.whiteTexture, maskTexture);
+
+        // Resetear progreso
+        cleanPercent = 0f;
+
+        // Mostrar nuevamente el diente
+        spriteRenderer.enabled = true;
+
+        isRespawning = false;
     }
 
 }

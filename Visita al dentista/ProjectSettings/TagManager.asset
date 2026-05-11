@@ -13,11 +13,11 @@ TagManager:
   - Teeth
   - Water
   - UI
-  - Cavity
+  - CavityMask
   - Tool_Brush
   - Tool_Cotton
-  - 
-  - 
+  - DirtyTooth
+  - CottonTool
   - 
   - 
   - 

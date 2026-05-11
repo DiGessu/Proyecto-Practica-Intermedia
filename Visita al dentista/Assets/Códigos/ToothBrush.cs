@@ -1,31 +1,32 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
+
 
 /// <summary>
 /// Coloca este script en el GameObject del CEPILLO DE DIENTES.
 /// El cepillo sigue al mouse/touch y borra la suciedad del diente al pasar encima.
 /// </summary>
-// Controla el comportamiento del cepillo: movimiento, sonido, partÌculas y limpieza del diente
+// Controla el comportamiento del cepillo: movimiento, sonido, part√≠culas y limpieza del diente
 public class ToothBrush : MonoBehaviour
 {
-    [Header("ConfiguraciÛn del cepillo")]
+    [Header("Configuraci√≥n del cepillo")]
     // Velocidad de suavizado para que el cepillo no se mueva bruscamente
     [Range(5f, 30f)] public float followSpeed = 15f;
 
-    // Determina si el script debe leer la posiciÛn del mouse autom·ticamente
+    // Determina si el script debe leer la posici√≥n del mouse autom√°ticamente
     public bool followMouse = true;
 
-    // Ajusta la posiciÛn visual del cepillo para que no tape exactamente el punto de limpieza
+    // Ajusta la posici√≥n visual del cepillo para que no tape exactamente el punto de limpieza
     public Vector2 brushOffset = new Vector2(0f, 0.5f);
 
-    // Si es true, el cepillo girar· mirando hacia donde se mueve el mouse
+    // Si es true, el cepillo girar√° mirando hacia donde se mueve el mouse
     public bool rotateToBrushDirection = false;
 
     [Header("Referencia al diente")]
-    // Referencia al script que maneja la suciedad (la lÛgica de "borrar" la mancha)
+    // Referencia al script que maneja la suciedad (la l√≥gica de "borrar" la mancha)
     public ToothDirtMask toothMask;
 
     [Header("Efectos")]
-    // Sistema de partÌculas para simular burbujas o espuma de pasta
+    // Sistema de part√≠culas para simular burbujas o espuma de pasta
     public ParticleSystem foamParticles;
 
     // Sonido de cepillado
@@ -39,10 +40,10 @@ public class ToothBrush : MonoBehaviour
     private Vector2 currentVelocity; // Usada por SmoothDamp para el movimiento suave
 
     private float brushAnimTime = 0f;
-    [Header("AnimaciÛn de cepillado")]
-    // QuÈ tanto se mueve el cepillo de lado a lado al limpiar
+    [Header("Animaci√≥n de cepillado")]
+    // Qu√© tanto se mueve el cepillo de lado a lado al limpiar
     public float brushAnimAmplitude = 0.05f;
-    // QuÈ tan r·pido vibra el cepillo
+    // Qu√© tan r√°pido vibra el cepillo
     public float brushAnimSpeed = 8f;
 
     void Awake()
@@ -50,7 +51,7 @@ public class ToothBrush : MonoBehaviour
         mainCamera = Camera.main;
         audioSource = GetComponent<AudioSource>();
 
-        // Si no hay AudioSource pero sÌ hay un sonido asignado, lo crea autom·ticamente
+        // Si no hay AudioSource pero s√≠ hay un sonido asignado, lo crea autom√°ticamente
         if (audioSource == null && brushSound != null)
             audioSource = gameObject.AddComponent<AudioSource>();
 
@@ -61,7 +62,7 @@ public class ToothBrush : MonoBehaviour
     {
         HandleInput();      // Paso 1: Leer entrada del usuario (Mouse/Touch)
         HandleBrushing();   // Paso 2: Procesar la limpieza y efectos
-        HandleAnimation();  // Paso 3: Aplicar vibraciÛn visual
+        HandleAnimation();  // Paso 3: Aplicar vibraci√≥n visual
     }
 
     // Gestiona el movimiento del cepillo siguiendo al puntero
@@ -71,7 +72,7 @@ public class ToothBrush : MonoBehaviour
 
         Vector2 targetPos = Vector2.zero;
 
-        // Soporte para pantallas t·ctiles (MÛviles)
+        // Soporte para pantallas t√°ctiles (M√≥viles)
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -82,12 +83,12 @@ public class ToothBrush : MonoBehaviour
         else
         {
             targetPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            isBrushing = Input.GetMouseButton(0); // True si el clic est· presionado
+            isBrushing = Input.GetMouseButton(0); // True si el clic est√° presionado
         }
 
         targetPos += brushOffset; // Aplica el desfase visual configurado
 
-        // Mueve el objeto hacia targetPos con un retraso suave para que se sienta org·nico
+        // Mueve el objeto hacia targetPos con un retraso suave para que se sienta org√°nico
         Vector2 newPos = Vector2.SmoothDamp(
             transform.position,
             targetPos,
@@ -95,7 +96,7 @@ public class ToothBrush : MonoBehaviour
             1f / followSpeed
         );
 
-        // Calcula la rotaciÛn basada en la direcciÛn del movimiento
+        // Calcula la rotaci√≥n basada en la direcci√≥n del movimiento
         if (rotateToBrushDirection)
         {
             Vector2 dir = newPos - (Vector2)transform.position;
@@ -114,7 +115,7 @@ public class ToothBrush : MonoBehaviour
         transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
     }
 
-    // Gestiona la lÛgica de limpieza y activa los efectos visuales/auditivos
+    // Gestiona la l√≥gica de limpieza y activa los efectos visuales/auditivos
     void HandleBrushing()
     {
         if (!isBrushing || toothMask == null) return;
@@ -122,10 +123,10 @@ public class ToothBrush : MonoBehaviour
         // Calcula el punto exacto donde las cerdas tocan el diente (restando el offset)
         Vector2 contactPoint = (Vector2)transform.position - brushOffset;
 
-        // Llama al script del diente para borrar la suciedad en esa posiciÛn
+        // Llama al script del diente para borrar la suciedad en esa posici√≥n
         toothMask.EraseAt(contactPoint);
 
-        // Activa la espuma si no se est· reproduciendo
+        // Activa la espuma si no se est√° reproduciendo
         if (foamParticles != null && !foamParticles.isPlaying)
             foamParticles.Play();
 
@@ -138,7 +139,7 @@ public class ToothBrush : MonoBehaviour
         }
     }
 
-    // Aplica una pequeÒa vibraciÛn (senoidal) para que el cepillo parezca estar limpiando de verdad
+    // Aplica una peque√±a vibraci√≥n (senoidal) para que el cepillo parezca estar limpiando de verdad
     void HandleAnimation()
     {
         if (isBrushing && brushAnimAmplitude > 0)
@@ -158,7 +159,7 @@ public class ToothBrush : MonoBehaviour
         }
     }
 
-    // Permite que otros scripts (como una cinem·tica) controlen el cepillo manualmente
+    // Permite que otros scripts (como una cinem√°tica) controlen el cepillo manualmente
     public void BrushAt(Vector2 worldPosition, bool brushing)
     {
         isBrushing = brushing;
@@ -166,7 +167,7 @@ public class ToothBrush : MonoBehaviour
             toothMask.EraseAt(worldPosition);
     }
 
-    // Dibuja un cÌrculo en el editor de Unity para visualizar el punto de contacto
+    // Dibuja un c√≠rculo en el editor de Unity para visualizar el punto de contacto
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
