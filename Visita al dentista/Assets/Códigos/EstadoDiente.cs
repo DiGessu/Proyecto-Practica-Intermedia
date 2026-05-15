@@ -76,9 +76,18 @@ public class EstadoDiente : MonoBehaviour
     {
         switch (estadoActual)
         {
-            case TipoEstado.LIMPIO: estadoActual = TipoEstado.SUCIO; imagenDiente.sprite = spriteSucio; break;
-            case TipoEstado.SUCIO: estadoActual = TipoEstado.SARRO; imagenDiente.sprite = spriteSarro; break;
-            case TipoEstado.SARRO: estadoActual = TipoEstado.CARIE; imagenDiente.sprite = spriteCarie; break;
+            case TipoEstado.LIMPIO:
+                estadoActual = TipoEstado.SUCIO;
+                imagenDiente.sprite = spriteSucio;
+                break;
+            case TipoEstado.SUCIO:
+                estadoActual = TipoEstado.SARRO; 
+                imagenDiente.sprite = spriteSarro;
+                break;
+            case TipoEstado.SARRO:
+                estadoActual = TipoEstado.CARIE;
+                imagenDiente.sprite = spriteCarie;
+                break;
         }
     }
 
