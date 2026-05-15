@@ -3,6 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+public enum TipoHerramienta
+{
+    CEPILLO,
+    CEPILLO_CON_PASTA,
+    ALGODON,
+    NINGUNA
+}
 public enum TipoEstado
 {
     LIMPIO,
@@ -29,7 +36,36 @@ public class EstadoDiente : MonoBehaviour
     public static event Action OnDienteLimpiado;
 
 
-    public void LimpiarDiente()
+    public void IntentarLimpiar(TipoHerramienta herramientaUsada)
+    {
+        bool limpiezaExitosa = false;
+
+        switch (estadoActual)
+        {
+            case TipoEstado.SUCIO:
+                if (herramientaUsada == TipoHerramienta.CEPILLO) limpiezaExitosa = true;
+                break;
+
+            case TipoEstado.SARRO:
+                if (herramientaUsada == TipoHerramienta.CEPILLO_CON_PASTA) limpiezaExitosa = true;
+                break;
+
+            case TipoEstado.CARIE:
+                if (herramientaUsada == TipoHerramienta.ALGODON) limpiezaExitosa = true;
+                break;
+        }
+
+        if (limpiezaExitosa)
+        {
+            EjecutarLimpieza();
+        }
+        else
+        {
+            Debug.Log("Herramienta incorrecta para este estado.");
+        }
+    }
+
+    private void EjecutarLimpieza()
     {
         estadoActual = TipoEstado.LIMPIO;
         imagenDiente.sprite = spriteLimpio;
