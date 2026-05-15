@@ -4684,8 +4684,8 @@ MonoBehaviour:
   estadoActual: 0
   imagenDiente: {fileID: 0}
   spriteLimpio: {fileID: 2953053123345276303, guid: 842d3331ce34c384990661ddabcd9890, type: 3}
-  spriteSucio: {fileID: 0}
-  spriteSarro: {fileID: 0}
+  spriteSucio: {fileID: -7504561315898274996, guid: 1e32708fa5bb89c49aae70926db257fb, type: 3}
+  spriteSarro: {fileID: -8886601551399727149, guid: bf63a53fb09fe6d43b2e77a7914d2066, type: 3}
   spriteCarie: {fileID: 8315602100950825375, guid: 44b56134a1fa13843af0f68e07581ef9, type: 3}
 --- !u!212 &5638975614279660446
 SpriteRenderer:
@@ -4903,7 +4903,7 @@ MonoBehaviour:
   estadoActual: 0
   imagenDiente: {fileID: 0}
   spriteLimpio: {fileID: 2953053123345276303, guid: 842d3331ce34c384990661ddabcd9890, type: 3}
-  spriteSucio: {fileID: 0}
+  spriteSucio: {fileID: 8091253115739262402, guid: a62c43acba9a847478bc036f23be0771, type: 3}
   spriteSarro: {fileID: 0}
   spriteCarie: {fileID: 8315602100950825375, guid: 44b56134a1fa13843af0f68e07581ef9, type: 3}
 --- !u!61 &5665733889294210385
