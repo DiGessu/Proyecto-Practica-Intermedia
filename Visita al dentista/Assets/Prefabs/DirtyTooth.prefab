@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6718486055212370305}
   - component: {fileID: 3433604790669358664}
-  - component: {fileID: 5562443576064055696}
   m_Layer: 0
   m_Name: DirtyTooth
   m_TagString: Untagged
@@ -88,20 +87,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5562443576064055696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7015028212034983005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf32b1682f9ce13489066290f6bdd0b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maskResolution: 512
-  brushSize: 45
-  brushSoftness: 0.5
-  cleanThreshold: 0.85
-  maskTexture: {fileID: 0}

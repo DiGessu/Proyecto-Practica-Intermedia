@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 /// <summary>
 /// Coloca este script en el GameObject del CEPILLO DE DIENTES.
 /// El cepillo sigue al mouse/touch y borra la suciedad del diente al pasar encima.

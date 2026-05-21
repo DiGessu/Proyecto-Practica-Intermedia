@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class ToothDirtMask : MonoBehaviour
+public class ToothSarroMask : MonoBehaviour
 {
-    [Header("Configuración de la máscara")]
+    [Header("Configuraci�n de la m�scara de Sarro")]
     public int maskResolution = 512;
     [Range(10, 120)] public int brushSize = 40;
     [Range(0f, 1f)] public float brushSoftness = 0.5f;
@@ -13,42 +13,26 @@ public class ToothDirtMask : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Material eraseMaterial;
     private Texture2D brushTexture;
-    private float alphaValue = 1f;
 
     private Texture2D readbackTexture;
     private int totalPixels;
     private float cleanPercent = 0f;
-
-    [Header("Respawn del diente")]
-    public float respawnTime = 10f;
-    private bool isRespawning = false;
-
-    public System.Action OnToothCleaned;
+    private bool isCleaned = false;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         InitializeMask();
-        OnToothCleaned += HandleToothCleaned;
     }
 
-    void HandleToothCleaned()
-    {
-        if (!isRespawning)
-            StartCoroutine(RespawnTooth());
-    }
-
-    // NUEVO: Este método permite reiniciar la máscara cuando cambia el estado (ej: a Sarro)
-    public void ResetearMascaraParaNuevoEstado()
+    public void ResetearMascaraSarro()
     {
         if (maskTexture != null)
         {
-            // Llenamos la máscara de blanco de nuevo para que sea completamente opaca (sucia)
             Graphics.Blit(Texture2D.whiteTexture, maskTexture);
             cleanPercent = 0f;
-            isRespawning = false;
+            isCleaned = false;
             if (spriteRenderer != null) spriteRenderer.enabled = true;
-            Debug.Log("Mascara reiniciada para el nuevo estado del diente.");
         }
     }
 
@@ -58,15 +42,13 @@ public class ToothDirtMask : MonoBehaviour
         maskTexture.filterMode = FilterMode.Bilinear;
         maskTexture.Create();
 
-        // Llenar la máscara de BLANCO al inicio
         Graphics.Blit(Texture2D.whiteTexture, maskTexture);
-
         brushTexture = CreateSoftBrush(64, brushSoftness);
 
         eraseMaterial = spriteRenderer.material;
-        if (eraseMaterial == null)
+        if (eraseMaterial == null || eraseMaterial.shader.name == "Sprites/Default")
         {
-            Debug.LogError("[ToothDirtMask] El SpriteRenderer no tiene material asignado.");
+            Debug.LogError($"[{gameObject.name}] El Sarro necesita un material con el Shader de borrador (MaskErase).");
             return;
         }
         eraseMaterial.SetTexture("_MaskTex", maskTexture);
@@ -84,6 +66,7 @@ public class ToothDirtMask : MonoBehaviour
         int py = Mathf.RoundToInt(uv.y * maskResolution);
 
         PaintBlackOnMask(px, py);
+        UpdateCleanPercent();
     }
 
     void PaintBlackOnMask(int centerX, int centerY)
@@ -130,12 +113,7 @@ public class ToothDirtMask : MonoBehaviour
             for (int x = 0; x < size; x++)
             {
                 float dist = Vector2.Distance(new Vector2(x, y), new Vector2(half, half)) / half;
-                float alpha;
-                if (softness < 0.01f)
-                    alpha = dist <= 1f ? 1f : 0f;
-                else
-                    alpha = 1f - Mathf.Clamp01((dist - (1f - softness)) / softness);
-
+                float alpha = (softness < 0.01f) ? (dist <= 1f ? 1f : 0f) : (1f - Mathf.Clamp01((dist - (1f - softness)) / softness));
                 pixels[y * size + x] = new Color(0, 0, 0, alpha);
             }
         }
@@ -145,23 +123,9 @@ public class ToothDirtMask : MonoBehaviour
         return tex;
     }
 
-    public float GetCleanPercent() { return cleanPercent; }
-
-    float nextCheckTime = 0f;
-    public float AlphaValue { get => alphaValue; set => alphaValue = value; }
-
-    void Update()
-    {
-        if (Time.time >= nextCheckTime)
-        {
-            nextCheckTime = Time.time + 0.5f;
-            UpdateCleanPercent();
-        }
-    }
-
     void UpdateCleanPercent()
     {
-        if (maskTexture == null || !maskTexture.IsCreated()) return;
+        if (maskTexture == null || !maskTexture.IsCreated() || isCleaned) return;
 
         RenderTexture prev = RenderTexture.active;
         RenderTexture small = RenderTexture.GetTemporary(readbackTexture.width, readbackTexture.height, 0, RenderTextureFormat.ARGB32);
@@ -183,42 +147,17 @@ public class ToothDirtMask : MonoBehaviour
 
         cleanPercent = (float)erasedCount / totalPixels;
 
-        if (cleanPercent >= cleanThreshold && !isRespawning)
+        if (cleanPercent >= cleanThreshold)
         {
-            OnToothCleaned?.Invoke();
+            isCleaned = true;
+            // Avisa de forma segura al script base del diente que ya se limpi� el sarro
+            gameObject.SendMessage("ActualizarSpriteInicial", SendMessageOptions.DontRequireReceiver);
+            gameObject.SetActive(false); // Oculta el objeto de sarro limpio
         }
     }
 
     void OnDestroy()
     {
         if (maskTexture != null) maskTexture.Release();
-    }
-
-    public void ClearTooth()
-    {
-        // Esto lo dejamos como venía en tu script original
-        Color c = spriteRenderer.color;
-        c.a -= 0.05f;
-        spriteRenderer.color = c;
-    }
-
-    System.Collections.IEnumerator RespawnTooth()
-    {
-        isRespawning = true;
-        spriteRenderer.enabled = false;
-        yield return new WaitForSeconds(respawnTime);
-
-        // Al reaparecer, obligamos al script EstadoDiente a volver a "LIMPIO" si es necesario
-        EstadoDiente estado = GetComponent<EstadoDiente>();
-        if (estado != null)
-        {
-            // Aquí puedes llamar al método que cambia tu enum a LIMPIO para que recupere el sprite base original
-            // Ejemplo: estado.CambiarEstado(Estado.LIMPIO);
-        }
-
-        Graphics.Blit(Texture2D.whiteTexture, maskTexture);
-        cleanPercent = 0f;
-        spriteRenderer.enabled = true;
-        isRespawning = false;
     }
 }

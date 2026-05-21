@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-
+// Declaramos los Enums al principio del archivo para que todo el proyecto los detecte
 public enum TipoHerramienta
 {
     CEPILLO,
@@ -10,6 +9,7 @@ public enum TipoHerramienta
     ALGODON,
     NINGUNA
 }
+
 public enum TipoEstado
 {
     LIMPIO,
@@ -18,23 +18,32 @@ public enum TipoEstado
     CARIE
 }
 
-
-[RequireComponent(typeof(SpriteRenderer))]
 public class EstadoDiente : MonoBehaviour
 {
-    [Header("Configuración de Estado")]
+    [Header("Configuración del Diente")]
+    public bool esDienteInferior = false;
+
+    [Header("Estado actual")]
     public TipoEstado estadoActual;
-    public Image imagenDiente;
 
-    [Header("Sprites por Estado")]
-    public Sprite spriteLimpio;
-    public Sprite spriteSucio;
-    public Sprite spriteSarro;
-    public Sprite spriteCarie;
-
+    [Header("Objetos por estado")]
+    public GameObject dienteLimpio;
+    public GameObject dienteSucio;
+    public GameObject dienteSarro;
+    public GameObject dienteCarie;
 
     public static event Action OnDienteLimpiado;
+    public static event Action OnCualquierCambioDeEstado;
 
+    void Start()
+    {
+        if (esDienteInferior)
+        {
+            estadoActual = TipoEstado.SARRO;
+        }
+
+        ActualizarEstadoVisual();
+    }
 
     public void IntentarLimpiar(TipoHerramienta herramientaUsada)
     {
@@ -42,62 +51,94 @@ public class EstadoDiente : MonoBehaviour
 
         switch (estadoActual)
         {
-            case TipoEstado.SUCIO:
-                if (herramientaUsada == TipoHerramienta.CEPILLO) limpiezaExitosa = true;
+            case TipoEstado.CARIE:
+                if (herramientaUsada == TipoHerramienta.ALGODON)
+                {
+                    estadoActual = TipoEstado.SARRO;
+                    limpiezaExitosa = true;
+                }
                 break;
 
             case TipoEstado.SARRO:
-                if (herramientaUsada == TipoHerramienta.CEPILLO_CON_PASTA) limpiezaExitosa = true;
+                if (herramientaUsada == TipoHerramienta.CEPILLO_CON_PASTA)
+                {
+                    estadoActual = TipoEstado.SUCIO;
+                    limpiezaExitosa = true;
+                }
                 break;
 
-            case TipoEstado.CARIE:
-                if (herramientaUsada == TipoHerramienta.ALGODON) limpiezaExitosa = true;
+            case TipoEstado.SUCIO:
+                if (herramientaUsada == TipoHerramienta.CEPILLO)
+                {
+                    estadoActual = TipoEstado.LIMPIO;
+                    limpiezaExitosa = true;
+                    OnDienteLimpiado?.Invoke();
+                }
                 break;
         }
 
         if (limpiezaExitosa)
         {
-            EjecutarLimpieza();
-        }
-        else
-        {
-            Debug.Log("Herramienta incorrecta para este estado.");
+            ActualizarEstadoVisual();
+            OnCualquierCambioDeEstado?.Invoke();
+            Debug.Log(gameObject.name + " limpiado. Nuevo estado: " + estadoActual);
         }
     }
 
-    private void EjecutarLimpieza()
-    {
-        estadoActual = TipoEstado.LIMPIO;
-        imagenDiente.sprite = spriteLimpio;
-        OnDienteLimpiado?.Invoke();
-    }
-
-    public void EnsuciarDiente(TipoEstado newTipo)
+    public void EnsuciarDiente()
     {
         switch (estadoActual)
         {
             case TipoEstado.LIMPIO:
                 estadoActual = TipoEstado.SUCIO;
-                imagenDiente.sprite = spriteSucio;
                 break;
+
             case TipoEstado.SUCIO:
-                estadoActual = TipoEstado.SARRO; 
-                imagenDiente.sprite = spriteSarro;
+                estadoActual = TipoEstado.SARRO;
                 break;
+
             case TipoEstado.SARRO:
-                estadoActual = TipoEstado.CARIE;
-                imagenDiente.sprite = spriteCarie;
+                if (!esDienteInferior)
+                {
+                    estadoActual = TipoEstado.CARIE;
+                }
                 break;
         }
+
+        ActualizarEstadoVisual();
+        OnCualquierCambioDeEstado?.Invoke();
+        Debug.Log(gameObject.name + " se ensució a: " + estadoActual);
     }
 
-    private void Awake()
+    void ActualizarEstadoVisual()
     {
-        if (imagenDiente == null) imagenDiente = GetComponent<Image>();
-    }
+        if (dienteLimpio != null) dienteLimpio.SetActive(true);
 
-    private void Start()
-    {
-        imagenDiente.sprite = spriteLimpio;
+        switch (estadoActual)
+        {
+            case TipoEstado.LIMPIO:
+                if (dienteSucio != null) dienteSucio.SetActive(false);
+                if (dienteSarro != null) dienteSarro.SetActive(false);
+                if (dienteCarie != null) dienteCarie.SetActive(false);
+                break;
+
+            case TipoEstado.SUCIO:
+                if (dienteSucio != null) dienteSucio.SetActive(true);
+                if (dienteSarro != null) dienteSarro.SetActive(false);
+                if (dienteCarie != null) dienteCarie.SetActive(false);
+                break;
+
+            case TipoEstado.SARRO:
+                if (dienteSucio != null) dienteSucio.SetActive(true);
+                if (dienteSarro != null) dienteSarro.SetActive(true);
+                if (dienteCarie != null) dienteCarie.SetActive(false);
+                break;
+
+            case TipoEstado.CARIE:
+                if (dienteSucio != null) dienteSucio.SetActive(true);
+                if (dienteSarro != null) dienteSarro.SetActive(true);
+                if (dienteCarie != null && !esDienteInferior) dienteCarie.SetActive(true);
+                break;
+        }
     }
 }

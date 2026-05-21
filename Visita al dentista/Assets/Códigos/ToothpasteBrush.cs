@@ -1,22 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CottonTool : MonoBehaviour
+public class ToothpasteBrush : MonoBehaviour
 {
-    [Header("Configuraci�n")]
+    [Header("Configuración del cepillo")]
     [Range(5f, 30f)]
     public float followSpeed = 15f;
 
     public bool followMouse = true;
 
-    public Vector2 toolOffset =
+    public Vector2 brushOffset =
         new Vector2(0f, 0.5f);
 
-    [Header("Referencia a la carie")]
-    public CavityMask cavityMask;
+    [Header("Referencia al sarro")]
+    public TartarMask tartarMask;
 
     private Camera mainCamera;
 
-    private bool isCleaning = false;
+    private bool isBrushing = false;
 
     private Vector2 currentVelocity;
 
@@ -28,7 +28,7 @@ public class CottonTool : MonoBehaviour
     void Update()
     {
         HandleInput();
-        HandleCleaning();
+        HandleBrushing();
     }
 
     void HandleInput()
@@ -42,10 +42,10 @@ public class CottonTool : MonoBehaviour
                 Input.mousePosition
             );
 
-        isCleaning =
+        isBrushing =
             Input.GetMouseButton(0);
 
-        targetPos += toolOffset;
+        targetPos += brushOffset;
 
         Vector2 newPos =
             Vector2.SmoothDamp(
@@ -63,26 +63,26 @@ public class CottonTool : MonoBehaviour
             );
     }
 
-    void HandleCleaning()
+    void HandleBrushing()
     {
-        if (!isCleaning || cavityMask == null)
+        if (!isBrushing || tartarMask == null)
             return;
 
         Vector2 contactPoint =
             (Vector2)transform.position
-            - toolOffset;
+            - brushOffset;
 
-        cavityMask.EraseAt(contactPoint);
+        tartarMask.EraseAt(contactPoint);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        CavityMask cavity =
-            collision.GetComponent<CavityMask>();
+        TartarMask tartar =
+            collision.GetComponent<TartarMask>();
 
-        if (cavity != null)
+        if (tartar != null)
         {
-            cavity.ClearCavity();
+            tartar.ClearTartar();
         }
     }
 }

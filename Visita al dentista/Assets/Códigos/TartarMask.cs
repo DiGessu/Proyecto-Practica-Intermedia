@@ -1,23 +1,22 @@
 using UnityEngine;
 
-public class CavityMask : MonoBehaviour
+public class TartarMask : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
-        spriteRenderer =
-            GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Igual que los otros sistemas
+    // Igual que el cepillo normal
     public void EraseAt(Vector2 worldPos)
     {
-        ClearCavity();
+        ClearTartar();
     }
 
-    // Baja opacidad poco a poco
-    public void ClearCavity()
+    // Baja opacidad igual que el diente normal
+    public void ClearTartar()
     {
         Color c = spriteRenderer.color;
 
