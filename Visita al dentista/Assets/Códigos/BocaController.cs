@@ -40,6 +40,12 @@ public class BocaController : MonoBehaviour
         EstadoDiente.OnCualquierCambioDeEstado -= VerificarSiTodaLaBocaEstaLimpia;
     }
 
+    private void OnDestroy()
+    {
+        EstadoDiente.OnDienteLimpiado -= ReiniciarTimer;
+        EstadoDiente.OnCualquierCambioDeEstado -= VerificarSiTodaLaBocaEstaLimpia;
+    }
+
     private void ReiniciarTimer()
     {
         if (this == null) return;
@@ -83,6 +89,12 @@ public class BocaController : MonoBehaviour
             if (dientes[indexDiente] != null)
             {
                 dientes[indexDiente].EnsuciarDiente();
+                ToothDirtMask mask = dientes[indexDiente].GetComponent<ToothDirtMask>();
+
+                if (mask != null)
+                {
+                    mask.RestaurarDiente();
+                }
             }
         }
     }

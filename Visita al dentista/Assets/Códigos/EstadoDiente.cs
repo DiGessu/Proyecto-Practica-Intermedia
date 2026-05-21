@@ -41,6 +41,12 @@ public class EstadoDiente : MonoBehaviour
         {
             estadoActual = TipoEstado.SARRO;
         }
+        TartarMask tartar = GetComponent<TartarMask>();
+
+        if (tartar != null)
+        {
+            tartar.RestoreTartar();
+        }
 
         ActualizarEstadoVisual();
     }

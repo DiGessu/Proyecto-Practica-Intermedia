@@ -158,6 +158,16 @@ public class ToothBrush : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        ToothDirtMask dirt = collision.GetComponent<ToothDirtMask>();
+
+        if (dirt != null)
+        {
+            dirt.ClearTooth();
+        }
+    }
+
     // Permite que otros scripts (como una cinemática) controlen el cepillo manualmente
     public void BrushAt(Vector2 worldPosition, bool brushing)
     {
@@ -173,12 +183,5 @@ public class ToothBrush : MonoBehaviour
         Gizmos.DrawWireSphere((Vector2)transform.position - brushOffset, 0.1f);
     }
 
-    // Si el cepillo toca un objeto con el script ToothDirtMask, limpia el diente por completo (limpieza total)
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<ToothDirtMask>())
-        {
-            collision.gameObject.GetComponent<ToothDirtMask>().ClearTooth();
-        }
-    }
+
 }

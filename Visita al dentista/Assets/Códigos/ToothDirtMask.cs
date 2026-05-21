@@ -29,26 +29,32 @@ public class ToothDirtMask : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         InitializeMask();
-        OnToothCleaned += HandleToothCleaned;
+        //OnToothCleaned += HandleToothCleaned;
     }
 
-    void HandleToothCleaned()
-    {
-        if (!isRespawning)
-            StartCoroutine(RespawnTooth());
-    }
-
+  
     // NUEVO: Este método permite reiniciar la máscara cuando cambia el estado (ej: a Sarro)
     public void ResetearMascaraParaNuevoEstado()
     {
         if (maskTexture != null)
         {
-            // Llenamos la máscara de blanco de nuevo para que sea completamente opaca (sucia)
+            // Restaurar suciedad
             Graphics.Blit(Texture2D.whiteTexture, maskTexture);
+
             cleanPercent = 0f;
             isRespawning = false;
-            if (spriteRenderer != null) spriteRenderer.enabled = true;
-            Debug.Log("Mascara reiniciada para el nuevo estado del diente.");
+
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = true;
+
+                // Restaurar opacidad completa
+                Color c = spriteRenderer.color;
+                c.a = 1f;
+                spriteRenderer.color = c;
+            }
+
+            Debug.Log("El diente se ha restaurado correctamente.");
         }
     }
 
@@ -196,29 +202,55 @@ public class ToothDirtMask : MonoBehaviour
 
     public void ClearTooth()
     {
-        // Esto lo dejamos como venía en tu script original
+        if (spriteRenderer == null) return;
+
         Color c = spriteRenderer.color;
+
+        // Baja la opacidad poco a poco
         c.a -= 0.05f;
+
+        // Evita valores negativos
+        c.a = Mathf.Clamp01(c.a);
+
         spriteRenderer.color = c;
+    }
+
+    public void RestaurarDiente()
+    {
+        if (spriteRenderer == null) return;
+
+        // Restaurar opacidad
+        Color c = spriteRenderer.color;
+        c.a = 1f;
+        spriteRenderer.color = c;
+
+        // Restaurar máscara
+        Graphics.Blit(Texture2D.whiteTexture, maskTexture);
+
+        cleanPercent = 0f;
+
+        Debug.Log("Diente restaurado.");
     }
 
     System.Collections.IEnumerator RespawnTooth()
     {
         isRespawning = true;
+
         spriteRenderer.enabled = false;
+
         yield return new WaitForSeconds(respawnTime);
 
-        // Al reaparecer, obligamos al script EstadoDiente a volver a "LIMPIO" si es necesario
-        EstadoDiente estado = GetComponent<EstadoDiente>();
-        if (estado != null)
-        {
-            // Aquí puedes llamar al método que cambia tu enum a LIMPIO para que recupere el sprite base original
-            // Ejemplo: estado.CambiarEstado(Estado.LIMPIO);
-        }
-
         Graphics.Blit(Texture2D.whiteTexture, maskTexture);
+
         cleanPercent = 0f;
+
         spriteRenderer.enabled = true;
+
+        // Restaurar opacidad
+        Color c = spriteRenderer.color;
+        c.a = 1f;
+        spriteRenderer.color = c;
+
         isRespawning = false;
     }
 }
