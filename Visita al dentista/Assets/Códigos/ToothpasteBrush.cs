@@ -11,8 +11,9 @@ public class ToothpasteBrush : MonoBehaviour
     public Vector2 brushOffset =
         new Vector2(0f, 0.5f);
 
-    [Header("Referencia al sarro")]
-    public TartarMask tartarMask;
+    [Header("Limpieza")]
+    [Range(0.01f, 0.1f)]
+    public float velocidadLimpieza = 0.02f;
 
     private Camera mainCamera;
 
@@ -28,11 +29,12 @@ public class ToothpasteBrush : MonoBehaviour
     void Update()
     {
         HandleInput();
-        HandleBrushing();
     }
 
     void HandleInput()
     {
+        isBrushing = Input.GetMouseButton(0);
+
         if (!followMouse) return;
 
         Vector2 targetPos;
@@ -41,9 +43,6 @@ public class ToothpasteBrush : MonoBehaviour
             mainCamera.ScreenToWorldPoint(
                 Input.mousePosition
             );
-
-        isBrushing =
-            Input.GetMouseButton(0);
 
         targetPos += brushOffset;
 
@@ -63,26 +62,25 @@ public class ToothpasteBrush : MonoBehaviour
             );
     }
 
-    void HandleBrushing()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isBrushing || tartarMask == null)
-            return;
-
-        Vector2 contactPoint =
-            (Vector2)transform.position
-            - brushOffset;
-
-        tartarMask.EraseAt(contactPoint);
+        Debug.Log("[ToothpasteBrush] Trigger con: " + collision.gameObject.name);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        TartarMask tartar =
-            collision.GetComponent<TartarMask>();
-
-        if (tartar != null)
+        if (!isBrushing)
         {
-            tartar.ClearTartar();
+            Debug.Log("[ToothpasteBrush] Tocando " + collision.gameObject.name + " pero NO hay click");
+            return;
         }
+        EstadoDiente diente = collision.GetComponent<EstadoDiente>();
+        if (diente == null)
+        {
+            Debug.Log("[ToothpasteBrush] " + collision.gameObject.name + " NO tiene EstadoDiente");
+            return;
+        }
+        Debug.Log("[ToothpasteBrush] Limpiando " + collision.gameObject.name + " | Estado: " + diente.estadoActual);
+        diente.LimpiarGradual(TipoHerramienta.CEPILLO_CON_PASTA, velocidadLimpieza);
     }
 }

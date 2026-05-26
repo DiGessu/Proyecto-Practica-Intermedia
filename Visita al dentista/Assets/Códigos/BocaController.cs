@@ -1,14 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class DienteConfig
+{
+    public GameObject dienteGO;
+    [Header("Sprites por estado")]
+    public Sprite spriteSucio;
+    public Sprite spriteSarro;
+    public Sprite spriteCarie;
+}
+
 public class BocaController : MonoBehaviour
 {
-    public List<EstadoDiente> dientes = new List<EstadoDiente>();
+    [Header("Configuracion de Dientes")]
+    public List<DienteConfig> configuracionDientes = new List<DienteConfig>();
+
+    private List<EstadoDiente> dientes = new List<EstadoDiente>();
     private int indexDiente;
 
-    [Header("Configuración de Tiempos")]
-    [Tooltip("Tiempo en segundos que esperará el juego al inicio antes de empezar a ensuciar solos los dientes.")]
-    [SerializeField] private float tiempoEsperaInicial = 20f;
+    [Header("Configuracion de Tiempos")]
+    [Tooltip("Tiempo en segundos que esperara el juego al inicio antes de empezar a ensuciar los dientes.")]
+    [SerializeField] private float tiempoEsperaInicial = 3f;
     [SerializeField] private float timerToChangeSprite = 5f;
 
     private float currentTime = 0;
@@ -17,15 +30,31 @@ public class BocaController : MonoBehaviour
 
     void Start()
     {
-        // Programamos que el temporizador de ensuciar empiece a correr después del tiempo configurado
+        InicializarDientes();
         Invoke("ComenzarAEnsuciar", tiempoEsperaInicial);
+    }
+
+    void InicializarDientes()
+    {
+        foreach (var config in configuracionDientes)
+        {
+            if (config.dienteGO == null) continue;
+
+            var estado = config.dienteGO.GetComponent<EstadoDiente>();
+            if (estado == null)
+                estado = config.dienteGO.AddComponent<EstadoDiente>();
+
+            estado.Inicializar(config.spriteSucio, config.spriteSarro, config.spriteCarie);
+
+            dientes.Add(estado);
+        }
     }
 
     void ComenzarAEnsuciar()
     {
-        if (bucleAleatorioActivo) return; // Si ya ganó limpiando todo antes, ignoramos esto
+        if (bucleAleatorioActivo) return;
         juegoComenzado = true;
-        Debug.Log("¡Tiempo de gracia terminado! BocaController empieza a ensuciar.");
+        Debug.Log("[BocaController] Comienza a ensuciar. Dientes en lista: " + dientes.Count);
     }
 
     private void OnEnable()
@@ -54,48 +83,34 @@ public class BocaController : MonoBehaviour
 
     private void Update()
     {
-        // Si logramos limpiar toda la boca, se activa la reaparición infinita acelerada
         if (bucleAleatorioActivo)
         {
             currentTime += Time.deltaTime;
             if (currentTime >= timerToChangeSprite * 0.5f)
-            {
                 EnsuciarDienteAleatorio();
-            }
             return;
         }
 
-        // Si ya pasó el tiempo inicial de gracia, corre el temporizador normal
         if (juegoComenzado)
         {
             if (currentTime < timerToChangeSprite)
-            {
                 currentTime += Time.deltaTime;
-            }
             else
-            {
                 EnsuciarDienteAleatorio();
-            }
         }
     }
 
     private void EnsuciarDienteAleatorio()
     {
-        if (dientes != null && dientes.Count > 0)
+        if (dientes == null || dientes.Count == 0) return;
+
+        indexDiente = Random.Range(0, dientes.Count);
+        currentTime = 0;
+
+        if (dientes[indexDiente] != null)
         {
-            indexDiente = Random.Range(0, dientes.Count);
-            currentTime = 0;
-
-            if (dientes[indexDiente] != null)
-            {
-                dientes[indexDiente].EnsuciarDiente();
-                ToothDirtMask mask = dientes[indexDiente].GetComponent<ToothDirtMask>();
-
-                if (mask != null)
-                {
-                    mask.RestaurarDiente();
-                }
-            }
+            Debug.Log("[BocaController] Ensuciando diente: " + dientes[indexDiente].gameObject.name);
+            dientes[indexDiente].EnsuciarDiente();
         }
     }
 
@@ -114,23 +129,18 @@ public class BocaController : MonoBehaviour
             }
         }
 
-        // Si limpiaste todo antes de tiempo o durante el juego, se activa el caos final aleatorio
         if (bocaLimpia && !bucleAleatorioActivo)
         {
-            CancelInvoke("ComenzarAEnsuciar"); // Cancelamos el reloj viejo por seguridad
-            Debug.Log("¡Boca perfectamente limpia! Desatando reaparición infinita.");
+            CancelInvoke("ComenzarAEnsuciar");
             bucleAleatorioActivo = true;
             juegoComenzado = true;
 
-            // Ensuciamos un par de dientes inmediatamente para reactivar la partida
             int cantidadInicial = Random.Range(2, 4);
             for (int i = 0; i < cantidadInicial; i++)
             {
                 int randomIdx = Random.Range(0, dientes.Count);
                 if (dientes[randomIdx] != null)
-                {
                     dientes[randomIdx].EnsuciarDiente();
-                }
             }
             currentTime = 0;
         }
