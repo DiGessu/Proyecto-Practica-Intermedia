@@ -5,8 +5,7 @@ public enum TipoHerramienta
 {
     CEPILLO,
     CEPILLO_CON_PASTA,
-    ALGODON,
-    NINGUNA
+    ALGODON
 }
 
 public enum TipoEstado
@@ -29,7 +28,7 @@ public class EstadoDiente : MonoBehaviour
     private const float COOLDOWN_TRAS_LIMPIEZA = 5f;
 
     private SpriteRenderer capaEnsuciandose;
-    private const float VELOCIDAD_ENSUCIAMIENTO = 0.35f;
+    private const float VELOCIDAD_ENSUCIAMIENTO = 0.525f;
 
     public static event Action OnDienteLimpiado;
     public static event Action OnCualquierCambioDeEstado;
@@ -80,45 +79,6 @@ public class EstadoDiente : MonoBehaviour
         return sr;
     }
 
-    public void IntentarLimpiar(TipoHerramienta herramientaUsada)
-    {
-        bool limpiezaExitosa = false;
-
-        switch (estadoActual)
-        {
-            case TipoEstado.CARIE:
-                if (herramientaUsada == TipoHerramienta.ALGODON)
-                {
-                    estadoActual = TipoEstado.SARRO;
-                    limpiezaExitosa = true;
-                }
-                break;
-
-            case TipoEstado.SARRO:
-                if (herramientaUsada == TipoHerramienta.CEPILLO_CON_PASTA)
-                {
-                    estadoActual = TipoEstado.SUCIO;
-                    limpiezaExitosa = true;
-                }
-                break;
-
-            case TipoEstado.SUCIO:
-                if (herramientaUsada == TipoHerramienta.CEPILLO)
-                {
-                    estadoActual = TipoEstado.LIMPIO;
-                    limpiezaExitosa = true;
-                    OnDienteLimpiado?.Invoke();
-                }
-                break;
-        }
-
-        if (limpiezaExitosa)
-        {
-            ActualizarEstadoVisual();
-            OnCualquierCambioDeEstado?.Invoke();
-        }
-    }
-
     public void EnsuciarDiente()
     {
         if (cooldownTimer > 0f) return;
@@ -152,33 +112,6 @@ public class EstadoDiente : MonoBehaviour
         }
 
         OnCualquierCambioDeEstado?.Invoke();
-    }
-
-    private void ActualizarEstadoVisual()
-    {
-        switch (estadoActual)
-        {
-            case TipoEstado.LIMPIO:
-                SetCapa(srSucio, false);
-                SetCapa(srSarro, false);
-                SetCapa(srCarie, false);
-                break;
-            case TipoEstado.SUCIO:
-                SetCapa(srSucio, true);
-                SetCapa(srSarro, false);
-                SetCapa(srCarie, false);
-                break;
-            case TipoEstado.SARRO:
-                SetCapa(srSucio, true);
-                SetCapa(srSarro, true);
-                SetCapa(srCarie, false);
-                break;
-            case TipoEstado.CARIE:
-                SetCapa(srSucio, true);
-                SetCapa(srSarro, true);
-                SetCapa(srCarie, true);
-                break;
-        }
     }
 
     public void LimpiarGradual(TipoHerramienta herramienta, float cantidad)

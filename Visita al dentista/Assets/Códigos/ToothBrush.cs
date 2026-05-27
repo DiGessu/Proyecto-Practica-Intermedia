@@ -33,7 +33,6 @@ public class ToothBrush : MonoBehaviour
     // Variables internas de control
     private Camera mainCamera;
     private AudioSource audioSource;
-    private Vector2 lastPosition;
     private bool isBrushing = false;
     private Vector2 currentVelocity; // Usada por SmoothDamp para el movimiento suave
 
@@ -53,7 +52,6 @@ public class ToothBrush : MonoBehaviour
         if (audioSource == null && brushSound != null)
             audioSource = gameObject.AddComponent<AudioSource>();
 
-        lastPosition = transform.position;
     }
 
     void Update()
@@ -114,7 +112,6 @@ public class ToothBrush : MonoBehaviour
             }
         }
 
-        lastPosition = transform.position;
         transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
     }
 

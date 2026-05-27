@@ -407,7 +407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &347113232
 Transform:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &360483959
 Transform:
   m_ObjectHideFlags: 0
@@ -1010,7 +1010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &512475330
 Transform:
   m_ObjectHideFlags: 0
@@ -1499,7 +1499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &579731393
 Transform:
   m_ObjectHideFlags: 0
@@ -1658,8 +1658,120 @@ MonoBehaviour:
     spriteSucio: {fileID: 5669684713267917229, guid: 194c6b33945a6f94e956ac800fde8fee, type: 3}
     spriteSarro: {fileID: -5764044569105270202, guid: 7d390034c2932c644bc7ca211c2aec12, type: 3}
     spriteCarie: {fileID: -374087192703607566, guid: b633cbd5628cbff4089cda22598c9f97, type: 3}
+  - dienteGO: {fileID: 1911479828673261413}
+    spriteSucio: {fileID: 578261864556309815, guid: 16cf0202a781b7d4e9d4762a1e883f76, type: 3}
+    spriteSarro: {fileID: -3487704799782343454, guid: 365dfff17f59cf34cbbe5caba31712c2, type: 3}
+    spriteCarie: {fileID: -7061139034932786819, guid: 9ad333db9228e034ca88ed4acdbdb677, type: 3}
+  - dienteGO: {fileID: 8143335527390118005}
+    spriteSucio: {fileID: 2402777818103902562, guid: 1dca8ef031d2c584ebb6f0e42d44d942, type: 3}
+    spriteSarro: {fileID: 2152865027938344966, guid: 70d5aab4c9fcd3d4a9cd31a7dab2c318, type: 3}
+    spriteCarie: {fileID: 5540401213466832937, guid: ff8b710fb8fdd5c4aa7bd100977ba599, type: 3}
+  - dienteGO: {fileID: 9085955296843325578}
+    spriteSucio: {fileID: -378624542101070052, guid: 6f8a7e953f27a0d4598dec7a80d280fd, type: 3}
+    spriteSarro: {fileID: -6783774815837147107, guid: 1da1ab568ac7f0c44a2aae6b2940e4a7, type: 3}
+    spriteCarie: {fileID: -4012750865468778218, guid: 195dfa59a0428a3488d8809fbdc945b5, type: 3}
+  - dienteGO: {fileID: 3746534135787506537}
+    spriteSucio: {fileID: -8200099371196446373, guid: 831a059c0a2f6334d8a308223c639d59, type: 3}
+    spriteSarro: {fileID: -977184823988641569, guid: 71933acd2eeb21e4182db460ea4d677b, type: 3}
+    spriteCarie: {fileID: 5540247706696630290, guid: 375ca60f025458a42a797f5b881571fe, type: 3}
+  - dienteGO: {fileID: 7886157276641255009}
+    spriteSucio: {fileID: 673038073630680141, guid: 29d5aae7828bfef4b9740b3f8c83a9c3, type: 3}
+    spriteSarro: {fileID: 2204217690339132780, guid: a5ce9a95b2dc5004f816f5738c9ef887, type: 3}
+    spriteCarie: {fileID: 3088540655255473557, guid: 1baba14643e63874484adf3be0269018, type: 3}
+  - dienteGO: {fileID: 5049072568751008316}
+    spriteSucio: {fileID: 8091253115739262402, guid: a62c43acba9a847478bc036f23be0771, type: 3}
+    spriteSarro: {fileID: -7740797400228913317, guid: 371855b863177da4f83123af17093f23, type: 3}
+    spriteCarie: {fileID: -7122334101656543476, guid: 8bd2b8b0b6d17ee4c92e31c614fe29fd, type: 3}
+  - dienteGO: {fileID: 5049072570365484946}
+    spriteSucio: {fileID: -7532329752653130173, guid: 03fce8d204b691a499730f0d03dee047, type: 3}
+    spriteSarro: {fileID: 5989696379337153757, guid: 3a4e9b598c4ce0148a0f0d6c8d290f38, type: 3}
+    spriteCarie: {fileID: 1957459047275757363, guid: c0977b679eeaee547b7955060c1cabf9, type: 3}
+  - dienteGO: {fileID: 5049072569171485772}
+    spriteSucio: {fileID: 3004494618572502671, guid: 8cd75407d59398d4d837e14441182f6d, type: 3}
+    spriteSarro: {fileID: 1285257450116175627, guid: 47e4645509320c74abfac313166dadc9, type: 3}
+    spriteCarie: {fileID: 1944123274906655367, guid: 1a1e0ad8da1c18944b8ef71c649b3bbb, type: 3}
+  - dienteGO: {fileID: 5049072570570259649}
+    spriteSucio: {fileID: -7504561315898274996, guid: 1e32708fa5bb89c49aae70926db257fb, type: 3}
+    spriteSarro: {fileID: -8886601551399727149, guid: bf63a53fb09fe6d43b2e77a7914d2066, type: 3}
+    spriteCarie: {fileID: -8877282724984989737, guid: d98ed26e5b456414c923e5188d024b5d, type: 3}
+  - dienteGO: {fileID: 5049072570132940952}
+    spriteSucio: {fileID: 3865251525430062026, guid: dc2a2bdc9f8a92648b9f4ff4d8eb7e15, type: 3}
+    spriteSarro: {fileID: -7887334470750918638, guid: 518a274ea87c5e543874f1328edcca2c, type: 3}
+    spriteCarie: {fileID: -707871940394860787, guid: dc30523768d12ed43adbd9b350ff5ee1, type: 3}
+  - dienteGO: {fileID: 5049072569341889673}
+    spriteSucio: {fileID: 5888692416452573529, guid: e2e0e0cac0aeac342bf95a9e0a7215e7, type: 3}
+    spriteSarro: {fileID: 1234592215688413698, guid: 96802294610c061458b6c938f90a2dd5, type: 3}
+    spriteCarie: {fileID: 8484464546343955868, guid: f2dd533def053064d84f88dbe9d6d8b5, type: 3}
+  - dienteGO: {fileID: 5049072570667877815}
+    spriteSucio: {fileID: -3256707978129848822, guid: 0a0a5d88b64fac4468887dd2f9e5e714, type: 3}
+    spriteSarro: {fileID: 2719777546304826612, guid: c4aeb49db2603f24d98f8b651571d408, type: 3}
+    spriteCarie: {fileID: 9125425846691675351, guid: 22b5801c546a8f0439051451d7d56d4b, type: 3}
+  - dienteGO: {fileID: 1296009063}
+    spriteSucio: {fileID: -723123234764325303, guid: dc08642798609984c8da6cdb089fdf79, type: 3}
+    spriteSarro: {fileID: 3663126667856539745, guid: 36c865a132cc1484196e89bfa34d2ff8, type: 3}
+    spriteCarie: {fileID: -6650148819571232755, guid: 474fc0395084f3443b774ed5f3ee7226, type: 3}
+  - dienteGO: {fileID: 1020375991}
+    spriteSucio: {fileID: 159559411537438112, guid: 9f9aa78709186ba429f498031de993b5, type: 3}
+    spriteSarro: {fileID: 2670642007470533452, guid: 7034defccfea8ae40b456b9efb9f7429, type: 3}
+    spriteCarie: {fileID: 3576285049011733603, guid: 801cabaa283e19e4488787fb7cfb7c98, type: 3}
+  - dienteGO: {fileID: 743035342}
+    spriteSucio: {fileID: 154213805113347310, guid: bef3430622abac14ba8d112ceab509a8, type: 3}
+    spriteSarro: {fileID: -6515599545032771962, guid: 88ddae132f2065e4b8287e15d9028b75, type: 3}
+    spriteCarie: {fileID: 8589173556293847877, guid: b6b33b35b3a85b947a5351544ce0e228, type: 3}
+  - dienteGO: {fileID: 1812240711}
+    spriteSucio: {fileID: -2437783409688995672, guid: 1e70bd343a45f384caea8fa453fa2035, type: 3}
+    spriteSarro: {fileID: 1507114382946124104, guid: 3724ceb581052ff4f99fa4d2ef1f89f4, type: 3}
+    spriteCarie: {fileID: 7766012598550941050, guid: 3937ceff81b7094429736d4aad970197, type: 3}
+  - dienteGO: {fileID: 360483958}
+    spriteSucio: {fileID: 8070627191915383353, guid: 52eeb35f269949442a5356351ac43ba8, type: 3}
+    spriteSarro: {fileID: 4765148813207658946, guid: 1ba76e17f1598ea44b307f04b8045dc1, type: 3}
+    spriteCarie: {fileID: 9203798257624048610, guid: b72ef682d365a4d4aa1e7e0948c7875a, type: 3}
+  - dienteGO: {fileID: 347113231}
+    spriteSucio: {fileID: -4721127796518383871, guid: 58507633e2658f240aa97884cfc24258, type: 3}
+    spriteSarro: {fileID: 3238353766004163143, guid: 7dda0a9d183b80344bd8080d29d5d043, type: 3}
+    spriteCarie: {fileID: -7560428756625307165, guid: b7706f2f919a1e84fb22091dc2dc00fd, type: 3}
+  - dienteGO: {fileID: 512475329}
+    spriteSucio: {fileID: 1263971507361968476, guid: 436bbac09b7ee8040aa1fad477c0ac75, type: 3}
+    spriteSarro: {fileID: -6813919055699325200, guid: ea2f4cadae32d1a4eb07f4189fd562c2, type: 3}
+    spriteCarie: {fileID: -5851913823836037459, guid: e8eb7c256553bcf42ac52988b53dc64c, type: 3}
+  - dienteGO: {fileID: 1404393096}
+    spriteSucio: {fileID: 8533394256279518691, guid: 8795b80ccda37544e939b2c170ef5b7c, type: 3}
+    spriteSarro: {fileID: 1978787071161860797, guid: f852fb75a7603ca42abf76885b21b40a, type: 3}
+    spriteCarie: {fileID: 3824893458443224087, guid: 21b03385776fb0e4ca2dd2cfbed0bb86, type: 3}
+  - dienteGO: {fileID: 1160285371}
+    spriteSucio: {fileID: -4548914137485028568, guid: c95684f6bc8215d4eb43f6f8651907cd, type: 3}
+    spriteSarro: {fileID: -4718792034734308310, guid: a13f52472938da248be8fdc485ccff65, type: 3}
+    spriteCarie: {fileID: 7417509187542008717, guid: a90a312429b3eb34c8e6eedd638e5ffb, type: 3}
+  - dienteGO: {fileID: 1603974522}
+    spriteSucio: {fileID: 3013092411401891496, guid: fa99205d214514244911094dab4fbcc1, type: 3}
+    spriteSarro: {fileID: -4528405009963863629, guid: 96698bbc38828214dabeded86d1617b5, type: 3}
+    spriteCarie: {fileID: -6728057499333729507, guid: ff61dc6943f9def419524de22b1a7cbb, type: 3}
+  - dienteGO: {fileID: 579731392}
+    spriteSucio: {fileID: 2414990728583185014, guid: bda1bcf7413da9d46a878398cd61e621, type: 3}
+    spriteSarro: {fileID: 6590556822230730780, guid: ee50fd6b8c01c174ab5268106e1c1573, type: 3}
+    spriteCarie: {fileID: -9058469124915572777, guid: 4644356d94a2f7a4e8b8e8f786def8fb, type: 3}
+  - dienteGO: {fileID: 990228959}
+    spriteSucio: {fileID: 3299192281931168135, guid: b600ad488a81a6c458e12fbafc4d5761, type: 3}
+    spriteSarro: {fileID: -1389026422939422329, guid: d475da791904874489520d20fd318e47, type: 3}
+    spriteCarie: {fileID: 1322617771511602317, guid: 84b3f36f557de6140bf99d1d366b18f4, type: 3}
+  - dienteGO: {fileID: 1895647928}
+    spriteSucio: {fileID: -9174137321884147225, guid: b93c60296d9a029478bbe28439b26cda, type: 3}
+    spriteSarro: {fileID: 7557002798096968846, guid: 3a7cb1a143b5f474f88870ac1251fbb3, type: 3}
+    spriteCarie: {fileID: 7746074133680562173, guid: 2fa394846b1d6144d9df1b5a05525e40, type: 3}
+  - dienteGO: {fileID: 2050497991}
+    spriteSucio: {fileID: 764244345696909759, guid: 4b3d90978c4c75d48b75ed170530c7ad, type: 3}
+    spriteSarro: {fileID: -8665131907579520089, guid: fbbe16b9c3dc27148987ed85f100a082, type: 3}
+    spriteCarie: {fileID: -6671206351841710836, guid: 9b6e2465269d0cb408089bbd12fed6e1, type: 3}
+  - dienteGO: {fileID: 990436431}
+    spriteSucio: {fileID: 1663649998995500436, guid: e35b0f5bb1694894282e6c57665ecacf, type: 3}
+    spriteSarro: {fileID: -2164624073091169731, guid: 8887f4d23e605ad4e9559e2053fba8c4, type: 3}
+    spriteCarie: {fileID: 4317959674773840747, guid: 9358a6fdf5299354191829af89f007ae, type: 3}
+  - dienteGO: {fileID: 662386625}
+    spriteSucio: {fileID: -3506282692359764134, guid: 34cd8b7a6e169cb41825a3738972b324, type: 3}
+    spriteSarro: {fileID: -3027634702656670058, guid: 819616701b6521d4a8af8180dccc9a70, type: 3}
+    spriteCarie: {fileID: 5975994096359946574, guid: cc065e81cbe022a40a8f7eb894cd3737, type: 3}
   tiempoEsperaInicial: 3
-  timerToChangeSprite: 5
+  timerToChangeSprite: 4
 --- !u!4 &612467332
 Transform:
   m_ObjectHideFlags: 0
@@ -1692,7 +1804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &662386626
 Transform:
   m_ObjectHideFlags: 0
@@ -1917,7 +2029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &743035343
 Transform:
   m_ObjectHideFlags: 0
@@ -2370,7 +2482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &990228960
 Transform:
   m_ObjectHideFlags: 0
@@ -2462,7 +2574,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &990436432
 Transform:
   m_ObjectHideFlags: 0
@@ -2641,7 +2753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1020375992
 Transform:
   m_ObjectHideFlags: 0
@@ -2872,7 +2984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1160285372
 Transform:
   m_ObjectHideFlags: 0
@@ -2964,7 +3076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1296009064
 Transform:
   m_ObjectHideFlags: 0
@@ -3148,7 +3260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1404393097
 Transform:
   m_ObjectHideFlags: 0
@@ -3497,7 +3609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1603974523
 Transform:
   m_ObjectHideFlags: 0
@@ -3872,7 +3984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1812240712
 Transform:
   m_ObjectHideFlags: 0
@@ -4161,7 +4273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1895647929
 Transform:
   m_ObjectHideFlags: 0
@@ -4495,7 +4607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2050497992
 Transform:
   m_ObjectHideFlags: 0
@@ -4859,7 +4971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &2165981108605643361
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5005,7 +5117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &3792439107761912028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5157,7 +5269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5049072569171485772
 GameObject:
   m_ObjectHideFlags: 0
@@ -5175,7 +5287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5049072569341889673
 GameObject:
   m_ObjectHideFlags: 0
@@ -5193,7 +5305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5049072570132940952
 GameObject:
   m_ObjectHideFlags: 0
@@ -5211,7 +5323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5049072570365484946
 GameObject:
   m_ObjectHideFlags: 0
@@ -5229,7 +5341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5049072570570259649
 GameObject:
   m_ObjectHideFlags: 0
@@ -5247,7 +5359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &5049072570667877815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5265,7 +5377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &5638975612905935163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5541,7 +5653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &7886157276641255010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5627,7 +5739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8143335527390118006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5701,7 +5813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &9085955296843325579
 MonoBehaviour:
   m_ObjectHideFlags: 0
