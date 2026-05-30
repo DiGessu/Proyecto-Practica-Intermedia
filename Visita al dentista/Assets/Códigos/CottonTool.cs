@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CottonTool : MonoBehaviour
 {
-    [Header("Configuración")]
+    [Header("Configuraciï¿½n")]
     [Range(5f, 30f)]
     public float followSpeed = 15f;
 
@@ -11,8 +11,9 @@ public class CottonTool : MonoBehaviour
     public Vector2 toolOffset =
         new Vector2(0f, 0.5f);
 
-    [Header("Referencia a la carie")]
-    public CavityMask cavityMask;
+    [Header("Limpieza")]
+    [Range(0.01f, 0.1f)]
+    public float velocidadLimpieza = 0.02f;
 
     private Camera mainCamera;
 
@@ -28,11 +29,12 @@ public class CottonTool : MonoBehaviour
     void Update()
     {
         HandleInput();
-        HandleCleaning();
     }
 
     void HandleInput()
     {
+        isCleaning = Input.GetMouseButton(0);
+
         if (!followMouse) return;
 
         Vector2 targetPos;
@@ -41,9 +43,6 @@ public class CottonTool : MonoBehaviour
             mainCamera.ScreenToWorldPoint(
                 Input.mousePosition
             );
-
-        isCleaning =
-            Input.GetMouseButton(0);
 
         targetPos += toolOffset;
 
@@ -63,26 +62,25 @@ public class CottonTool : MonoBehaviour
             );
     }
 
-    void HandleCleaning()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isCleaning || cavityMask == null)
-            return;
-
-        Vector2 contactPoint =
-            (Vector2)transform.position
-            - toolOffset;
-
-        cavityMask.EraseAt(contactPoint);
+        Debug.Log("[CottonTool] Trigger con: " + collision.gameObject.name);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        CavityMask cavity =
-            collision.GetComponent<CavityMask>();
-
-        if (cavity != null)
+        if (!isCleaning)
         {
-            cavity.ClearCavity();
+            Debug.Log("[CottonTool] Tocando " + collision.gameObject.name + " pero NO hay click");
+            return;
         }
+        EstadoDiente diente = collision.GetComponent<EstadoDiente>();
+        if (diente == null)
+        {
+            Debug.Log("[CottonTool] " + collision.gameObject.name + " NO tiene EstadoDiente");
+            return;
+        }
+        Debug.Log("[CottonTool] Limpiando " + collision.gameObject.name + " | Estado: " + diente.estadoActual);
+        diente.LimpiarGradual(TipoHerramienta.ALGODON, velocidadLimpieza);
     }
 }

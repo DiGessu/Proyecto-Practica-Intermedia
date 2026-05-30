@@ -1,13 +1,11 @@
 using System;
 using UnityEngine;
 
-// Declaramos los Enums al principio del archivo para que todo el proyecto los detecte
 public enum TipoHerramienta
 {
     CEPILLO,
     CEPILLO_CON_PASTA,
-    ALGODON,
-    NINGUNA
+    ALGODON
 }
 
 public enum TipoEstado
@@ -20,131 +18,164 @@ public enum TipoEstado
 
 public class EstadoDiente : MonoBehaviour
 {
-    [Header("Configuración del Diente")]
-    public bool esDienteInferior = false;
+    [HideInInspector] public TipoEstado estadoActual;
 
-    [Header("Estado actual")]
-    public TipoEstado estadoActual;
+    private SpriteRenderer srSucio;
+    private SpriteRenderer srSarro;
+    private SpriteRenderer srCarie;
 
-    [Header("Objetos por estado")]
-    public GameObject dienteLimpio;
-    public GameObject dienteSucio;
-    public GameObject dienteSarro;
-    public GameObject dienteCarie;
+    private float cooldownTimer;
+    private const float COOLDOWN_TRAS_LIMPIEZA = 5f;
+
+    private SpriteRenderer capaEnsuciandose;
+    private const float VELOCIDAD_ENSUCIAMIENTO = 0.525f;
 
     public static event Action OnDienteLimpiado;
     public static event Action OnCualquierCambioDeEstado;
 
-    void Start()
+    void Update()
     {
-        if (esDienteInferior)
-        {
-            estadoActual = TipoEstado.SARRO;
-        }
-        TartarMask tartar = GetComponent<TartarMask>();
+        if (cooldownTimer > 0f)
+            cooldownTimer -= Time.deltaTime;
 
-        if (tartar != null)
+        if (capaEnsuciandose != null)
         {
-            tartar.RestoreTartar();
+            Color c = capaEnsuciandose.color;
+            c.a += VELOCIDAD_ENSUCIAMIENTO * Time.deltaTime;
+            if (c.a >= 1f)
+            {
+                c.a = 1f;
+                capaEnsuciandose.color = c;
+                capaEnsuciandose = null;
+            }
+            else
+            {
+                capaEnsuciandose.color = c;
+            }
         }
-
-        ActualizarEstadoVisual();
     }
 
-    public void IntentarLimpiar(TipoHerramienta herramientaUsada)
+    public void Inicializar(Sprite spriteSucio, Sprite spriteSarro, Sprite spriteCarie)
     {
-        bool limpiezaExitosa = false;
+        estadoActual = TipoEstado.LIMPIO;
 
-        switch (estadoActual)
-        {
-            case TipoEstado.CARIE:
-                if (herramientaUsada == TipoHerramienta.ALGODON)
-                {
-                    estadoActual = TipoEstado.SARRO;
-                    limpiezaExitosa = true;
-                }
-                break;
+        srSucio = CrearCapa("Sucio", spriteSucio, 1);
+        srSarro = CrearCapa("Sarro", spriteSarro, 2);
+        srCarie = CrearCapa("Carie", spriteCarie, 3);
 
-            case TipoEstado.SARRO:
-                if (herramientaUsada == TipoHerramienta.CEPILLO_CON_PASTA)
-                {
-                    estadoActual = TipoEstado.SUCIO;
-                    limpiezaExitosa = true;
-                }
-                break;
+        SetCapa(srSucio, false);
+        SetCapa(srSarro, false);
+        SetCapa(srCarie, false);
+    }
 
-            case TipoEstado.SUCIO:
-                if (herramientaUsada == TipoHerramienta.CEPILLO)
-                {
-                    estadoActual = TipoEstado.LIMPIO;
-                    limpiezaExitosa = true;
-                    OnDienteLimpiado?.Invoke();
-                }
-                break;
-        }
-
-        if (limpiezaExitosa)
-        {
-            ActualizarEstadoVisual();
-            OnCualquierCambioDeEstado?.Invoke();
-            Debug.Log(gameObject.name + " limpiado. Nuevo estado: " + estadoActual);
-        }
+    private SpriteRenderer CrearCapa(string nombre, Sprite sprite, int orden)
+    {
+        if (sprite == null) return null;
+        var go = new GameObject(nombre);
+        go.transform.SetParent(transform, false);
+        var sr = go.AddComponent<SpriteRenderer>();
+        sr.sprite = sprite;
+        sr.sortingOrder = orden;
+        return sr;
     }
 
     public void EnsuciarDiente()
     {
+        if (cooldownTimer > 0f) return;
+        if (capaEnsuciandose != null) return;
+
+        SpriteRenderer nuevaCapa = null;
+
         switch (estadoActual)
         {
             case TipoEstado.LIMPIO:
                 estadoActual = TipoEstado.SUCIO;
+                nuevaCapa = srSucio;
                 break;
-
             case TipoEstado.SUCIO:
                 estadoActual = TipoEstado.SARRO;
+                nuevaCapa = srSarro;
                 break;
-
             case TipoEstado.SARRO:
-                if (!esDienteInferior)
+                estadoActual = TipoEstado.CARIE;
+                nuevaCapa = srCarie;
+                break;
+        }
+
+        if (nuevaCapa != null)
+        {
+            Color c = nuevaCapa.color;
+            c.a = 0f;
+            nuevaCapa.color = c;
+            nuevaCapa.enabled = true;
+            capaEnsuciandose = nuevaCapa;
+        }
+
+        OnCualquierCambioDeEstado?.Invoke();
+    }
+
+    public void LimpiarGradual(TipoHerramienta herramienta, float cantidad)
+    {
+        SpriteRenderer capaActiva = null;
+        TipoEstado siguienteEstado = estadoActual;
+
+        switch (estadoActual)
+        {
+            case TipoEstado.CARIE:
+                if (herramienta == TipoHerramienta.ALGODON)
                 {
-                    estadoActual = TipoEstado.CARIE;
+                    capaActiva = srCarie;
+                    siguienteEstado = TipoEstado.SARRO;
+                }
+                break;
+            case TipoEstado.SARRO:
+                if (herramienta == TipoHerramienta.CEPILLO_CON_PASTA)
+                {
+                    capaActiva = srSarro;
+                    siguienteEstado = TipoEstado.SUCIO;
+                }
+                break;
+            case TipoEstado.SUCIO:
+                if (herramienta == TipoHerramienta.CEPILLO)
+                {
+                    capaActiva = srSucio;
+                    siguienteEstado = TipoEstado.LIMPIO;
                 }
                 break;
         }
 
-        ActualizarEstadoVisual();
-        OnCualquierCambioDeEstado?.Invoke();
-        Debug.Log(gameObject.name + " se ensució a: " + estadoActual);
+        if (capaActiva == null)
+        {
+            Debug.Log("[EstadoDiente] " + gameObject.name + " herramienta incorrecta para estado " + estadoActual);
+            return;
+        }
+
+        if (capaEnsuciandose == capaActiva)
+            capaEnsuciandose = null;
+
+        Color c = capaActiva.color;
+        c.a -= cantidad;
+        capaActiva.color = c;
+
+        Debug.Log("[EstadoDiente] " + gameObject.name + " alpha: " + c.a.ToString("F2") + " estado: " + estadoActual);
+
+        if (c.a <= 0.05f)
+        {
+            c.a = 1f;
+            capaActiva.color = c;
+            capaActiva.enabled = false;
+
+            estadoActual = siguienteEstado;
+            cooldownTimer = COOLDOWN_TRAS_LIMPIEZA;
+            Debug.Log("[EstadoDiente] " + gameObject.name + " TRANSICION a " + estadoActual + " | cooldown " + COOLDOWN_TRAS_LIMPIEZA + "s");
+            if (estadoActual == TipoEstado.LIMPIO)
+                OnDienteLimpiado?.Invoke();
+            OnCualquierCambioDeEstado?.Invoke();
+        }
     }
 
-    void ActualizarEstadoVisual()
+    private void SetCapa(SpriteRenderer sr, bool activo)
     {
-        if (dienteLimpio != null) dienteLimpio.SetActive(true);
-
-        switch (estadoActual)
-        {
-            case TipoEstado.LIMPIO:
-                if (dienteSucio != null) dienteSucio.SetActive(false);
-                if (dienteSarro != null) dienteSarro.SetActive(false);
-                if (dienteCarie != null) dienteCarie.SetActive(false);
-                break;
-
-            case TipoEstado.SUCIO:
-                if (dienteSucio != null) dienteSucio.SetActive(true);
-                if (dienteSarro != null) dienteSarro.SetActive(false);
-                if (dienteCarie != null) dienteCarie.SetActive(false);
-                break;
-
-            case TipoEstado.SARRO:
-                if (dienteSucio != null) dienteSucio.SetActive(true);
-                if (dienteSarro != null) dienteSarro.SetActive(true);
-                if (dienteCarie != null) dienteCarie.SetActive(false);
-                break;
-
-            case TipoEstado.CARIE:
-                if (dienteSucio != null) dienteSucio.SetActive(true);
-                if (dienteSarro != null) dienteSarro.SetActive(true);
-                if (dienteCarie != null && !esDienteInferior) dienteCarie.SetActive(true);
-                break;
-        }
+        if (sr != null) sr.enabled = activo;
     }
 }
