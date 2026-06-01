@@ -73,17 +73,17 @@ public class PainManager : MonoBehaviour
     {
         if (barraDolorSlider == null || juegoTerminado) return;
 
-        // 1. Forzamos el cálculo preciso frame a frame
-        CalcularDolorTotal();
+        // === NUEVA LÍNEA DE SEGURIDAD ===
+        // Si el TimeManager ya dio el juego por ganado, detenemos la lógica de dolor
+        TimeManager timeManager = FindFirstObjectByType<TimeManager>();
+        if (timeManager != null && timeManager.ElNivelYaTermino()) return;
 
-        // 2. Suavizar el movimiento de la barra
+        // ... (Todo el resto de tu código de Update del PainManager se queda exactamente igual)
+        CalcularDolorTotal();
         dolorActualVisual = Mathf.MoveTowards(dolorActualVisual, dolorObjetivo, velocidadSuavizado * Time.deltaTime);
         barraDolorSlider.value = dolorActualVisual;
-
-        // 3. Actualizar la cara según el valor visual actual de la barra
         ActualizarCaraUI(dolorActualVisual);
 
-        // 4. Verificar si llegó al 100% (usamos 99.9f por si acaso el float no da exactamente 100 debido al suavizado)
         if (dolorActualVisual >= 99.9f)
         {
             GameOver();

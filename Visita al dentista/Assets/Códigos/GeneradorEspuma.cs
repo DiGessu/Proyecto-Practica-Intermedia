@@ -10,6 +10,9 @@ public class GeneradorEspuma : MonoBehaviour
     [Tooltip("Cada cuántos segundos se genera una espuma mientras limpias.")]
     [SerializeField] private float tiempoEntreEspuma = 0.15f;
 
+    [Header("Sonido")]
+    [SerializeField] private AudioClip sonidoBurbuja;
+
     private float timerGeneracion;
 
     public void SoltarEspuma(Vector3 posicionDiente)
@@ -30,5 +33,10 @@ public class GeneradorEspuma : MonoBehaviour
             // Instancia la espuma justo ahí
             Instantiate(prefabEspuma, posFinal, Quaternion.identity);
         }
+        if (sonidoBurbuja != null)
+        {
+            AudioManager.instancia.ReproducirSFX(sonidoBurbuja);
+        }
     }
+
 }
