@@ -65,6 +65,19 @@ public class CottonTool : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("[CottonTool] Trigger con: " + collision.gameObject.name);
+
+        if(!isCleaning) return; //
+        EstadoDiente diente = collision.GetComponent<EstadoDiente>(); //
+        if (diente == null) return; //
+
+        // === NUEVA COMPROBACIÓN ===
+        // Si el diente NO está siendo limpiado efectivamente por el ALGODÓN, no hace espuma
+        if (!diente.EstaSiendoLimpiadoPor(TipoHerramienta.ALGODON)) return;
+
+        Vector3 puntoContacto = collision.ClosestPoint(transform.position);
+        FindFirstObjectByType<GeneradorEspuma>()?.SoltarEspuma(puntoContacto);
+
+        diente.LimpiarGradual(TipoHerramienta.ALGODON, velocidadLimpieza); //
     }
 
     private void OnTriggerStay2D(Collider2D collision)

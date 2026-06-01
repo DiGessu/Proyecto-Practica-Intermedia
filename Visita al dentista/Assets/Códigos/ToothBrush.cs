@@ -153,6 +153,19 @@ public class ToothBrush : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("[ToothBrush] Trigger con: " + collision.gameObject.name);
+
+        if (!isBrushing) return; //
+        EstadoDiente diente = collision.GetComponent<EstadoDiente>(); //
+        if (diente == null) return; //
+
+        // === NUEVA COMPROBACIÓN ===
+        // Si el diente NO está siendo limpiado efectivamente por el CEPILLO, no hace espuma
+        if (!diente.EstaSiendoLimpiadoPor(TipoHerramienta.CEPILLO)) return;
+
+        Vector3 puntoContacto = collision.ClosestPoint(transform.position);
+        FindFirstObjectByType<GeneradorEspuma>()?.SoltarEspuma(puntoContacto);
+
+        diente.LimpiarGradual(TipoHerramienta.CEPILLO, velocidadLimpieza); //
     }
 
     private void OnTriggerStay2D(Collider2D collision)

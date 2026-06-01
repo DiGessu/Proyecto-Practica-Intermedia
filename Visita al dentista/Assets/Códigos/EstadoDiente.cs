@@ -178,4 +178,26 @@ public class EstadoDiente : MonoBehaviour
     {
         if (sr != null) sr.enabled = activo;
     }
+
+    // Nueva función para comprobar si la herramienta actual realmente está limpiando el diente
+    public bool EstaSiendoLimpiadoPor(TipoHerramienta herramienta)
+    {
+        // Si el diente ya está limpio, no se está limpiando nada
+        if (estadoActual == TipoEstado.LIMPIO) return false;
+
+        // Evaluamos según tu misma lógica de estados si es la herramienta correcta
+        switch (estadoActual)
+        {
+            case TipoEstado.CARIE:
+                return (herramienta == TipoHerramienta.ALGODON);
+
+            case TipoEstado.SARRO:
+                return (herramienta == TipoHerramienta.CEPILLO_CON_PASTA);
+
+            case TipoEstado.SUCIO:
+                return (herramienta == TipoHerramienta.CEPILLO);
+        }
+
+        return false;
+    }
 }
