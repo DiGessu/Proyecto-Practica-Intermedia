@@ -30,13 +30,16 @@ public class AudioManager : MonoBehaviour
     // El volumen de un Mixer va de -80dB (silencio) a 0dB (volumen máximo).
     public void CambiarVolumenMusica(float valorSlider)
     {
-        float deciembeleos = Mathf.Log10(Mathf.Clamp(valorSlider, 0.0001f, 1f)) * 20f;
+        // Si al subir el slider se apaga, invertimos el valor restando (1f - valorSlider)
+        float valorInvertido = 1f - valorSlider;
+        float deciembeleos = Mathf.Log10(Mathf.Clamp(valorInvertido, 0.0001f, 1f)) * 20f;
         audioMixer.SetFloat("VolMusica", deciembeleos);
     }
 
     public void CambiarVolumenSFX(float valorSlider)
     {
-        float deciembeleos = Mathf.Log10(Mathf.Clamp(valorSlider, 0.0001f, 1f)) * 20f;
+        float valorInvertido = 1f - valorSlider;
+        float deciembeleos = Mathf.Log10(Mathf.Clamp(valorInvertido, 0.0001f, 1f)) * 20f;
         audioMixer.SetFloat("VolSFX", deciembeleos);
     }
 

@@ -542,18 +542,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 555351626}
   m_FillRect: {fileID: 1145098856}
   m_HandleRect: {fileID: 555351625}
-  m_Direction: 0
-  m_MinValue: 0.0001
+  m_Direction: 1
+  m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.0001
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1108989222}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: CambiarVolumenMusica
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -757,7 +757,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &798380920
@@ -1961,7 +1961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1882880026
@@ -2046,7 +2046,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1368499526}
   m_FillRect: {fileID: 1298371136}
   m_HandleRect: {fileID: 1368499525}
-  m_Direction: 0
+  m_Direction: 1
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
@@ -2057,7 +2057,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1108989222}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: CambiarVolumenSFX
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
