@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CottonTool : MonoBehaviour
 {
-    [Header("Configuraci�n")]
+    [Header("Configuracin")]
     [Range(5f, 30f)]
     public float followSpeed = 15f;
 
@@ -16,14 +16,17 @@ public class CottonTool : MonoBehaviour
     public float velocidadLimpieza = 0.02f;
 
     private Camera mainCamera;
-
     private bool isCleaning = false;
-
     private Vector2 currentVelocity;
+
+    // === NUEVA VARIABLE EXCLUSIVA PARA EL SONIDO ===
+    private SonidoAlgodon controladorSonido;
 
     void Awake()
     {
         mainCamera = Camera.main;
+        // Buscamos el componente de sonido exclusivo del algodón en la escena
+        controladorSonido = Object.FindFirstObjectByType<SonidoAlgodon>();
     }
 
     void Update()
@@ -66,22 +69,26 @@ public class CottonTool : MonoBehaviour
     {
         Debug.Log("[CottonTool] Trigger con: " + collision.gameObject.name);
 
-        if(!isCleaning) return; //
-        EstadoDiente diente = collision.GetComponent<EstadoDiente>(); //
-        if (diente == null) return; //
+        // === CONTACTO CON EL SCRIPT DE AUDIO ===
+        if (controladorSonido != null) controladorSonido.SetTocandoDiente(true);
 
-        // === NUEVA COMPROBACIÓN ===
-        // Si el diente NO está siendo limpiado efectivamente por el ALGODÓN, no hace espuma
+        if (!isCleaning) return;
+        EstadoDiente diente = collision.GetComponent<EstadoDiente>();
+        if (diente == null) return;
+
         if (!diente.EstaSiendoLimpiadoPor(TipoHerramienta.ALGODON)) return;
 
         Vector3 puntoContacto = collision.ClosestPoint(transform.position);
         FindFirstObjectByType<GeneradorEspuma>()?.SoltarEspuma(puntoContacto);
 
-        diente.LimpiarGradual(TipoHerramienta.ALGODON, velocidadLimpieza); //
+        diente.LimpiarGradual(TipoHerramienta.ALGODON, velocidadLimpieza);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // === MANTENER EL CONTACTO CON EL AUDIO ===
+        if (controladorSonido != null) controladorSonido.SetTocandoDiente(true);
+
         if (!isCleaning)
         {
             Debug.Log("[CottonTool] Tocando " + collision.gameObject.name + " pero NO hay click");
@@ -95,5 +102,15 @@ public class CottonTool : MonoBehaviour
         }
         Debug.Log("[CottonTool] Limpiando " + collision.gameObject.name + " | Estado: " + diente.estadoActual);
         diente.LimpiarGradual(TipoHerramienta.ALGODON, velocidadLimpieza);
+    }
+
+    // === CORTA EL SONIDO AL SALIR DEL DIENTE ===
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        EstadoDiente diente = collision.GetComponent<EstadoDiente>();
+        if (diente != null)
+        {
+            if (controladorSonido != null) controladorSonido.SetTocandoDiente(false);
+        }
     }
 }
