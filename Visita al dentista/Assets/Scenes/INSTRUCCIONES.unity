@@ -2108,7 +2108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 458, y: 39}
+  m_AnchoredPosition: {x: 456, y: 0}
   m_SizeDelta: {x: 592.0594, y: 809.3574}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2048060008
@@ -2131,13 +2131,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: " OBJETIVO\nDebes limpiar los dientes del chico para evitar que su barra
-    de dolor llegue al m\xE1ximo. Cuantos m\xE1s dientes sucios tenga, m\xE1s r\xE1pido
-    aumentar\xE1 el dolor.\n\nLIMPIEZA\nCada diente tiene tres estados de suciedad
-    diferentes y requiere una herramienta espec\xEDfica para limpiarse:\n-Primer
-    estado: Cepillo normal\n-Segundo estado: Cepillo con pasta dental\n-Tercer estado:
-    Algod\xF3n\n\nCOMO GANAR Y COMO PERDER\nPara ganar debes resistir y mantener
-    la barra de dolor bajo control hasta que el medidor de tiempo llegue a cero;
+  m_text: " OBJETIVO\nLimpiar dientes del chico para evitar que la barra de dolor
+    llegue al m\xE1ximo. Cada diente sucio llena la barra.\n\nLIMPIEZA\nCada diente
+    tiene tres estados de suciedad y requiere una herramienta espec\xEDfica para
+    limpiarse:\n-Primer estado: Cepillo normal\n-Segundo estado: Cepillo con pasta
+    dental\n-Tercer estado: Algod\xF3n\n\nCOMO GANAR Y COMO PERDER\nPara ganar, resistir
+    y mantener la barra de dolor bajo control hasta que el tiempo llegue a cero;
     se pierde si la barra llega al 100%."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 53823c48d6530054c80105efcc6f7e60, type: 2}
