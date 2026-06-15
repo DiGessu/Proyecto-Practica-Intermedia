@@ -595,9 +595,9 @@ MonoBehaviour:
   cara2_Molesto: {fileID: -553380285985820031, guid: d220f5971d40218449712ea041cbd25e, type: 3}
   cara3_Asustado: {fileID: -4232151167946429664, guid: a367d8949733da640872d6d798f803fa, type: 3}
   cara4_Dolor: {fileID: -6768015986944550621, guid: 124d16359be62554db0cdd3c9fda227d, type: 3}
-  dolorSucio: 3
-  dolorSarro: 5
-  dolorCarie: 13
+  dolorSucio: 4
+  dolorSarro: 6
+  dolorCarie: 14
   velocidadSuavizado: 6
 --- !u!4 &222451261
 Transform:
@@ -1535,7 +1535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970795c6d3c0a034c9ffccc800586e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoRestante: 180
+  tiempoRestante: 120
   textoTimer: {fileID: 940568715}
   panelWin: {fileID: 592765046}
 --- !u!4 &444493161
