@@ -1521,7 +1521,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followSpeed: 15
-  followMouse: 0
   brushOffset: {x: 0, y: 0.5}
   velocidadLimpieza: 0.02
 --- !u!114 &478734314
@@ -3365,7 +3364,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.2374768
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -3699,7 +3698,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 8575407679457819988, guid: 0a56ae2a2a719f24db9a88be319e4433, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5610,7 +5609,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followSpeed: 15
-  followMouse: 0
   toolOffset: {x: 0, y: 0.5}
   velocidadLimpieza: 0.02
 --- !u!212 &1778107027
@@ -5976,14 +5974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followSpeed: 15
-  followMouse: 0
   brushOffset: {x: 0, y: 0.5}
-  rotateToBrushDirection: 0
   velocidadLimpieza: 0.02
-  foamParticles: {fileID: 0}
-  brushSound: {fileID: 0}
-  brushAnimAmplitude: 0.05
-  brushAnimSpeed: 8
 --- !u!50 &1834976062
 Rigidbody2D:
   serializedVersion: 5
