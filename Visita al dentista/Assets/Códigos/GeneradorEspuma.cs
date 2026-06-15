@@ -23,20 +23,19 @@ public class GeneradorEspuma : MonoBehaviour
         {
             timerGeneracion = 0f;
 
-            // Reducimos el offset a algo mínimo para que brote pegadito al punto de contacto
+            // 1. Calculamos la posición final una sola vez
             Vector3 offsetAleatorio = new Vector3(Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f), 0f);
             Vector3 posFinal = posicionDiente + offsetAleatorio;
+            posFinal.z = -1f; // Forzamos el eje Z al frente para que se vea en el plano 2D
 
-            // Forzamos el eje Z al frente
-            posFinal.z = -1f;
-
-            // Instancia la espuma justo ahí
+            // 2. Instanciamos la espuma física en la escena
             Instantiate(prefabEspuma, posFinal, Quaternion.identity);
-        }
-        if (sonidoBurbuja != null)
-        {
-            AudioManager.instancia.ReproducirSFX(sonidoBurbuja);
+
+            // 3. Evaluamos el audio usando la variable global unificada 'Instancia'
+            if (sonidoBurbuja != null && AudioManager.Instancia != null)
+            {
+                AudioSource.PlayClipAtPoint(sonidoBurbuja, posFinal);
+            }
         }
     }
-
 }

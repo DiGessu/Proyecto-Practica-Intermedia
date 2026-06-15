@@ -2,81 +2,108 @@
 
 public class ToothpasteBrush : MonoBehaviour
 {
-    // ... TODA TU CONFIGURACIÓN ANTERIOR SE QUEDA IGUAL ...
     [Header("Configuración del cepillo")]
-    [Range(5f, 30f)]
-    public float followSpeed = 15f;
-    public bool followMouse = true;
+    [Range(5f, 30f)] public float followSpeed = 15f;
     public Vector2 brushOffset = new Vector2(0f, 0.5f);
 
     [Header("Limpieza")]
-    [Range(0.01f, 0.1f)]
-    public float velocidadLimpieza = 0.02f;
-
-    // === NUEVA VARIABLE PARA EL SONIDO ===
-    private ControladorSonidoCepillo controladorSonido;
+    [Range(0.01f, 0.1f)] public float velocidadLimpieza = 0.02f;
 
     private Camera mainCamera;
+    private AudioSource miAudioSource;
     private bool isBrushing = false;
+    private bool isDragging = false;
     private Vector2 currentVelocity;
+    private bool estaTocandoDiente = false;
 
     void Awake()
     {
         mainCamera = Camera.main;
-        // Buscamos el componente de sonido en la escena
-        controladorSonido = Object.FindFirstObjectByType<ControladorSonidoCepillo>();
+        miAudioSource = GetComponent<AudioSource>();
+    }
+
+    void OnMouseDown()
+    {
+        isDragging = true;
+    }
+
+    void OnMouseUp()
+    {
+        isDragging = false;
+        isBrushing = false;
+        ApagarSonido();
     }
 
     void Update()
     {
-        HandleInput();
+        if (isDragging)
+        {
+            isBrushing = Input.GetMouseButton(0);
+
+            Vector2 targetPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            targetPos += brushOffset;
+            transform.position = Vector2.SmoothDamp(transform.position, targetPos, ref currentVelocity, 1f / followSpeed);
+
+            if (isBrushing && estaTocandoDiente)
+            {
+                EncenderSonido();
+            }
+            else
+            {
+                ApagarSonido();
+            }
+        }
     }
 
-    void HandleInput()
+    private void EncenderSonido()
     {
-        isBrushing = Input.GetMouseButton(0);
-        // ... (Tu código de movimiento SmoothDamp se queda exactamente igual) ...
-        if (!followMouse) return;
-        Vector2 targetPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        targetPos += brushOffset;
-        Vector2 newPos = Vector2.SmoothDamp(transform.position, targetPos, ref currentVelocity, 1f / followSpeed);
-        transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
+        if (miAudioSource != null && !miAudioSource.isPlaying)
+        {
+            miAudioSource.Play();
+        }
+    }
+
+    private void ApagarSonido()
+    {
+        if (miAudioSource != null && miAudioSource.isPlaying)
+        {
+            miAudioSource.Stop();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        EstadoDiente diente = collision.GetComponent<EstadoDiente>();
-        if (diente == null) return;
-
-        // Avisamos al manager de audio
-        if (controladorSonido != null) controladorSonido.SetTocandoDiente(true);
-
-        if (!isBrushing) return;
-        if (!diente.EstaSiendoLimpiadoPor(TipoHerramienta.CEPILLO_CON_PASTA)) return;
-
-        Vector3 puntoContacto = collision.ClosestPoint(transform.position);
-        FindFirstObjectByType<GeneradorEspuma>()?.SoltarEspuma(puntoContacto);
-        diente.LimpiarGradual(TipoHerramienta.CEPILLO_CON_PASTA, velocidadLimpieza);
+        if (collision.GetComponent<EstadoDiente>() != null)
+        {
+            estaTocandoDiente = true;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         EstadoDiente diente = collision.GetComponent<EstadoDiente>();
+
+        // BLINDAJE
         if (diente == null) return;
 
-        // Mantenemos activo el estado del audio mientras siga dentro del collider
-        if (controladorSonido != null) controladorSonido.SetTocandoDiente(true);
+        if (isBrushing && isDragging)
+        {
+            if (diente.EstaSiendoLimpiadoPor(global::TipoHerramienta.CEPILLO_CON_PASTA))
+            {
+                Vector3 puntoContacto = collision.ClosestPoint(transform.position);
+                FindFirstObjectByType<GeneradorEspuma>()?.SoltarEspuma(puntoContacto);
+            }
 
-        if (!isBrushing) return;
-        diente.LimpiarGradual(TipoHerramienta.CEPILLO_CON_PASTA, velocidadLimpieza);
+            diente.LimpiarGradual(global::TipoHerramienta.CEPILLO_CON_PASTA, velocidadLimpieza);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        EstadoDiente diente = collision.GetComponent<EstadoDiente>();
-        if (diente != null)
+        if (collision.GetComponent<EstadoDiente>() != null)
         {
-            if (controladorSonido != null) controladorSonido.SetTocandoDiente(false);
+            estaTocandoDiente = false;
+            ApagarSonido();
         }
     }
 }

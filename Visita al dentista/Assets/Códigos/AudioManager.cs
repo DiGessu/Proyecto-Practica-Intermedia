@@ -3,7 +3,8 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instancia;
+    // PROPIEDAD GLOBAL AUTOMÁTICA: Con "I" mayúscula y protegida para todo el proyecto
+    public static AudioManager Instancia { get; private set; }
 
     [Header("Mixer Principal")]
     [SerializeField] private AudioMixer audioMixer;
@@ -14,10 +15,10 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        // Patron Singleton: evita que se duplique el AudioManager al cambiar de escena
-        if (instancia == null)
+        // Usamos Instancia con mayúscula de forma coherente internamente
+        if (Instancia == null)
         {
-            instancia = this;
+            Instancia = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -26,32 +27,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Funciones públicas para cambiar el volumen desde los Sliders (UI)
-    // El volumen de un Mixer va de -80dB (silencio) a 0dB (volumen máximo).
     public void CambiarVolumenMusica(float valorSlider)
     {
-        // Si al subir el slider se apaga, invertimos el valor restando (1f - valorSlider)
-        float valorInvertido = 1f - valorSlider;
-        float deciembeleos = Mathf.Log10(Mathf.Clamp(valorInvertido, 0.0001f, 1f)) * 20f;
+        float deciembeleos = Mathf.Log10(Mathf.Clamp(valorSlider, 0.0001f, 1f)) * 20f;
         audioMixer.SetFloat("VolMusica", deciembeleos);
     }
 
     public void CambiarVolumenSFX(float valorSlider)
     {
-        float valorInvertido = 1f - valorSlider;
-        float deciembeleos = Mathf.Log10(Mathf.Clamp(valorInvertido, 0.0001f, 1f)) * 20f;
+        float deciembeleos = Mathf.Log10(Mathf.Clamp(valorSlider, 0.0001f, 1f)) * 20f;
         audioMixer.SetFloat("VolSFX", deciembeleos);
-    }
-
-    // Funciones para reproducir audio desde otros scripts
-    public void ReproducirMusica(AudioClip clip)
-    {
-        fuenteMusica.clip = clip;
-        fuenteMusica.Play();
-    }
-
-    public void ReproducirSFX(AudioClip clip)
-    {
-        fuenteSFX.PlayOneShot(clip);
     }
 }
