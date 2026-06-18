@@ -7574,7 +7574,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.12455416, y: -0.07526779}
+  m_Offset: {x: 0.12455416, y: 10.815647}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7584,7 +7584,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.5708919, y: 26.857437}
+  m_Size: {x: 3.5708919, y: 5.0756063}
   m_EdgeRadius: 0
 --- !u!82 &1834976064
 AudioSource:
@@ -7790,6 +7790,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: ea1d7b088f2ba3b4388352457aa47dbe, type: 2}
   fuenteMusica: {fileID: 507353715}
   fuenteSFX: {fileID: 1080118399}
+  sliderMusica: {fileID: 0}
+  sliderSFX: {fileID: 0}
 --- !u!4 &1870928418
 Transform:
   m_ObjectHideFlags: 0
@@ -8235,8 +8237,8 @@ RectTransform:
   - {fileID: 1708854848}
   - {fileID: 719861116}
   - {fileID: 100390827}
-  - {fileID: 1760390355}
   - {fileID: 940568713}
+  - {fileID: 1760390355}
   - {fileID: 592765050}
   - {fileID: 754419383}
   - {fileID: 1910611326}

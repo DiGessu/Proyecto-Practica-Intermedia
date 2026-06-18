@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.42277765, g: 0.9150943, b: 0.41869882, a: 1}
+  m_Color: {r: 0, g: 0.61685514, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -496,8 +496,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -717.61475, y: 450.44037}
-  m_SizeDelta: {x: 314.7706, y: 55.1193}
+  m_AnchoredPosition: {x: -716, y: 457}
+  m_SizeDelta: {x: 314.77, y: 55.1193}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270071406
 MonoBehaviour:
@@ -820,7 +820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 11.4137, y: 0}
+  m_AnchoredPosition: {x: 21.414, y: 0}
   m_SizeDelta: {x: 42.8275, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &555351626
@@ -1173,8 +1173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
+  m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1013424559
 GameObject:
@@ -1244,6 +1244,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: ea1d7b088f2ba3b4388352457aa47dbe, type: 2}
   fuenteMusica: {fileID: 1422450909}
   fuenteSFX: {fileID: 167565931}
+  sliderMusica: {fileID: 270071406}
+  sliderSFX: {fileID: 1882880028}
 --- !u!4 &1108989223
 Transform:
   m_ObjectHideFlags: 0
@@ -2254,7 +2256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38487893, g: 0.8773585, b: 0.4049746, a: 1}
+  m_Color: {r: 0.08962262, g: 0.58705115, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
