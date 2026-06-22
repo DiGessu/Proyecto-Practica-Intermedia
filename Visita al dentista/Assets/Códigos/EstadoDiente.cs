@@ -28,7 +28,12 @@ public class EstadoDiente : MonoBehaviour
     private const float COOLDOWN_TRAS_LIMPIEZA = 5f;
 
     private SpriteRenderer capaEnsuciandose;
-    private const float VELOCIDAD_ENSUCIAMIENTO = 0.525f;
+
+    // --- SE SEPARA LA VELOCIDAD PARA CONTROLARLA POR ESTADO ---
+    private const float VELOCIDAD_ENSUCIAMIENTO_NORMAL = 0.525f;
+    // Modifica este 1.85f (casi el triple de rápido) si quieres que la carie brote aún más instantáneamente
+    private const float VELOCIDAD_ENSUCIAMIENTO_CARIE = 1.85f;
+    private float velocidadEnsuciamientoActual;
 
     public static event Action OnDienteLimpiado;
     public static event Action OnCualquierCambioDeEstado;
@@ -41,7 +46,9 @@ public class EstadoDiente : MonoBehaviour
         if (capaEnsuciandose != null)
         {
             Color c = capaEnsuciandose.color;
-            c.a += VELOCIDAD_ENSUCIAMIENTO * Time.deltaTime;
+            // Se aplica la velocidad dinámica dependiendo de qué estado se esté cocinando
+            c.a += velocidadEnsuciamientoActual * Time.deltaTime;
+
             if (c.a >= 1f)
             {
                 c.a = 1f;
@@ -58,6 +65,7 @@ public class EstadoDiente : MonoBehaviour
     public void Inicializar(Sprite spriteSucio, Sprite spriteSarro, Sprite spriteCarie)
     {
         estadoActual = TipoEstado.LIMPIO;
+        velocidadEnsuciamientoActual = VELOCIDAD_ENSUCIAMIENTO_NORMAL;
 
         srSucio = CrearCapa("Sucio", spriteSucio, 1);
         srSarro = CrearCapa("Sarro", spriteSarro, 2);
@@ -85,20 +93,51 @@ public class EstadoDiente : MonoBehaviour
         if (capaEnsuciandose != null) return;
 
         SpriteRenderer nuevaCapa = null;
+        float dadoProbabilidad = UnityEngine.Random.Range(0f, 100f);
+
+        // Por defecto, la velocidad es la normal del juego
+        velocidadEnsuciamientoActual = VELOCIDAD_ENSUCIAMIENTO_NORMAL;
 
         switch (estadoActual)
         {
             case TipoEstado.LIMPIO:
-                estadoActual = TipoEstado.SUCIO;
-                nuevaCapa = srSucio;
+                if (dadoProbabilidad <= 25f)
+                {
+                    estadoActual = TipoEstado.SARRO;
+                    nuevaCapa = srSarro;
+                    if (srSucio != null) { srSucio.color = Color.white; srSucio.enabled = true; }
+                }
+                else
+                {
+                    estadoActual = TipoEstado.SUCIO;
+                    nuevaCapa = srSucio;
+                }
                 break;
+
             case TipoEstado.SUCIO:
-                estadoActual = TipoEstado.SARRO;
-                nuevaCapa = srSarro;
+                if (dadoProbabilidad <= 60f)
+                {
+                    estadoActual = TipoEstado.CARIE;
+                    nuevaCapa = srCarie;
+                    // ¡ACELERACIÓN EXTREMA!: Si salta directo a carie, la opacidad subirá volando
+                    velocidadEnsuciamientoActual = VELOCIDAD_ENSUCIAMIENTO_CARIE;
+
+                    if (srSucio != null) { srSucio.color = Color.white; srSucio.enabled = true; }
+                    if (srSarro != null) { srSarro.color = Color.white; srSarro.enabled = true; }
+                }
+                else
+                {
+                    estadoActual = TipoEstado.SARRO;
+                    nuevaCapa = srSarro;
+                }
                 break;
+
             case TipoEstado.SARRO:
+                // Si el diente ya tiene sarro, se transforma en CARIE obligatoriamente...
                 estadoActual = TipoEstado.CARIE;
                 nuevaCapa = srCarie;
+                // ... ¡Y se activa la velocidad ultra rápida para que aparezca de inmediato!
+                velocidadEnsuciamientoActual = VELOCIDAD_ENSUCIAMIENTO_CARIE;
                 break;
         }
 
@@ -179,13 +218,10 @@ public class EstadoDiente : MonoBehaviour
         if (sr != null) sr.enabled = activo;
     }
 
-    // Nueva función para comprobar si la herramienta actual realmente está limpiando el diente
     public bool EstaSiendoLimpiadoPor(TipoHerramienta herramienta)
     {
-        // Si el diente ya está limpio, no se está limpiando nada
         if (estadoActual == TipoEstado.LIMPIO) return false;
 
-        // Evaluamos según tu misma lógica de estados si es la herramienta correcta
         switch (estadoActual)
         {
             case TipoEstado.CARIE:
