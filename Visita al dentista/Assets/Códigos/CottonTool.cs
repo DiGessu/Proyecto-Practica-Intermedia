@@ -83,18 +83,25 @@ public class CottonTool : MonoBehaviour
     {
         EstadoDiente diente = collision.GetComponent<EstadoDiente>();
 
-        // BLINDAJE
+        // BLINDAJE: Si no es un diente, nos salimos
         if (diente == null) return;
 
         if (isCleaning && isDragging)
         {
+            // 1. Intentamos limpiar el diente (baja opacidad de la caries si existe)
+            diente.LimpiarGradual(global::TipoHerramienta.ALGODON, velocidadLimpieza);
+
+            // 2. LA MAGIA: Solo soltamos espuma si el diente realmente necesita el ALGODON (tiene caries)
             if (diente.EstaSiendoLimpiadoPor(global::TipoHerramienta.ALGODON))
             {
                 Vector3 puntoContacto = collision.ClosestPoint(transform.position);
-                FindFirstObjectByType<GeneradorEspuma>()?.SoltarEspuma(puntoContacto);
-            }
+                GeneradorEspumaAlgodon generador = FindFirstObjectByType<GeneradorEspumaAlgodon>();
 
-            diente.LimpiarGradual(global::TipoHerramienta.ALGODON, velocidadLimpieza);
+                if (generador != null)
+                {
+                    generador.SoltarEspumaNueva(puntoContacto);
+                }
+            }
         }
     }
 
