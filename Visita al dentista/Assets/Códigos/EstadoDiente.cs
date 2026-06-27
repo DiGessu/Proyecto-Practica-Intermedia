@@ -183,14 +183,33 @@ public class EstadoDiente : MonoBehaviour
                 break;
         }
 
+        // --- SOLUCIÓN DE EMERGENCIA PARA LOS DIENTES TRABADOS ---
+        // Si la herramienta es la correcta para el Sarro, pero la capa 'srSarro' es null 
+        // o falló en el Inspector, forzamos el cambio de estado manualmente.
+        if (estadoActual == TipoEstado.SARRO && herramienta == TipoHerramienta.CEPILLO_CON_PASTA && capaActiva == null)
+        {
+            Debug.LogWarning("[Salvavidas] Forzando limpieza de sarro en " + gameObject.name);
+            estadoActual = TipoEstado.SUCIO;
+            cooldownTimer = COOLDOWN_TRAS_LIMPIEZA;
+            OnCualquierCambioDeEstado?.Invoke();
+            return;
+        }
+
+        // Destrabamos el estado de ensuciamiento si el niño está limpiando
+        if (capaActiva != null && capaEnsuciandose != null)
+        {
+            capaEnsuciandose = null;
+        }
+
+        // Si no es el caso de emergencia y la herramienta sigue siendo incorrecta, salimos
         if (capaActiva == null)
         {
             Debug.Log("[EstadoDiente] " + gameObject.name + " herramienta incorrecta para estado " + estadoActual);
             return;
         }
 
-        if (capaEnsuciandose == capaActiva)
-            capaEnsuciandose = null;
+        // Nos aseguramos de que la capa esté visible para que el niño vea el progreso
+        capaActiva.enabled = true;
 
         Color c = capaActiva.color;
         c.a -= cantidad;
@@ -198,6 +217,7 @@ public class EstadoDiente : MonoBehaviour
 
         Debug.Log("[EstadoDiente] " + gameObject.name + " alpha: " + c.a.ToString("F2") + " estado: " + estadoActual);
 
+        // Transición normal cuando el alpha llega a cero
         if (c.a <= 0.05f)
         {
             c.a = 1f;
@@ -206,9 +226,12 @@ public class EstadoDiente : MonoBehaviour
 
             estadoActual = siguienteEstado;
             cooldownTimer = COOLDOWN_TRAS_LIMPIEZA;
+
             Debug.Log("[EstadoDiente] " + gameObject.name + " TRANSICION a " + estadoActual + " | cooldown " + COOLDOWN_TRAS_LIMPIEZA + "s");
+
             if (estadoActual == TipoEstado.LIMPIO)
                 OnDienteLimpiado?.Invoke();
+
             OnCualquierCambioDeEstado?.Invoke();
         }
     }
