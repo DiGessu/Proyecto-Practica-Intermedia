@@ -31,7 +31,6 @@ public class EstadoDiente : MonoBehaviour
 
     // --- SE SEPARA LA VELOCIDAD PARA CONTROLARLA POR ESTADO ---
     private const float VELOCIDAD_ENSUCIAMIENTO_NORMAL = 0.525f;
-    // Modifica este 1.85f (casi el triple de rápido) si quieres que la carie brote aún más instantáneamente
     private const float VELOCIDAD_ENSUCIAMIENTO_CARIE = 1.85f;
     private float velocidadEnsuciamientoActual;
 
@@ -46,14 +45,13 @@ public class EstadoDiente : MonoBehaviour
         if (capaEnsuciandose != null)
         {
             Color c = capaEnsuciandose.color;
-            // Se aplica la velocidad dinámica dependiendo de qué estado se esté cocinando
             c.a += velocidadEnsuciamientoActual * Time.deltaTime;
 
             if (c.a >= 1f)
             {
                 c.a = 1f;
                 capaEnsuciandose.color = c;
-                capaEnsuciandose = null;
+                capaEnsuciandose = null; // Se libera al completarse
             }
             else
             {
@@ -70,6 +68,11 @@ public class EstadoDiente : MonoBehaviour
         srSucio = CrearCapa("Sucio", spriteSucio, 1);
         srSarro = CrearCapa("Sarro", spriteSarro, 2);
         srCarie = CrearCapa("Carie", spriteCarie, 3);
+
+        if (srCarie != null)
+        {
+            srCarie.gameObject.AddComponent<AnimacionDolorCarie>();
+        }
 
         SetCapa(srSucio, false);
         SetCapa(srSarro, false);
@@ -95,7 +98,6 @@ public class EstadoDiente : MonoBehaviour
         SpriteRenderer nuevaCapa = null;
         float dadoProbabilidad = UnityEngine.Random.Range(0f, 100f);
 
-        // Por defecto, la velocidad es la normal del juego
         velocidadEnsuciamientoActual = VELOCIDAD_ENSUCIAMIENTO_NORMAL;
 
         switch (estadoActual)
@@ -119,7 +121,6 @@ public class EstadoDiente : MonoBehaviour
                 {
                     estadoActual = TipoEstado.CARIE;
                     nuevaCapa = srCarie;
-                    // ¡ACELERACIÓN EXTREMA!: Si salta directo a carie, la opacidad subirá volando
                     velocidadEnsuciamientoActual = VELOCIDAD_ENSUCIAMIENTO_CARIE;
 
                     if (srSucio != null) { srSucio.color = Color.white; srSucio.enabled = true; }
@@ -133,10 +134,8 @@ public class EstadoDiente : MonoBehaviour
                 break;
 
             case TipoEstado.SARRO:
-                // Si el diente ya tiene sarro, se transforma en CARIE obligatoriamente...
                 estadoActual = TipoEstado.CARIE;
                 nuevaCapa = srCarie;
-                // ... ¡Y se activa la velocidad ultra rápida para que aparezca de inmediato!
                 velocidadEnsuciamientoActual = VELOCIDAD_ENSUCIAMIENTO_CARIE;
                 break;
         }
@@ -183,32 +182,32 @@ public class EstadoDiente : MonoBehaviour
                 break;
         }
 
-        // --- SOLUCIÓN DE EMERGENCIA PARA LOS DIENTES TRABADOS ---
-        // Si la herramienta es la correcta para el Sarro, pero la capa 'srSarro' es null 
-        // o falló en el Inspector, forzamos el cambio de estado manualmente.
+        // --- SOLUCIÓN DE EMERGENCIA AMPLIADA ---
+        // Si por algún motivo externo la capa física falta pero estamos en el estado, forzamos la transición
         if (estadoActual == TipoEstado.SARRO && herramienta == TipoHerramienta.CEPILLO_CON_PASTA && capaActiva == null)
         {
             Debug.LogWarning("[Salvavidas] Forzando limpieza de sarro en " + gameObject.name);
             estadoActual = TipoEstado.SUCIO;
+            capaEnsuciandose = null; // Forzamos liberación total
             cooldownTimer = COOLDOWN_TRAS_LIMPIEZA;
             OnCualquierCambioDeEstado?.Invoke();
             return;
         }
 
-        // Destrabamos el estado de ensuciamiento si el niño está limpiando
-        if (capaActiva != null && capaEnsuciandose != null)
+        // ¡LA CORRECCIÓN CLAVE!: Si la herramienta es la correcta, cancelamos inmediatamente 
+        // el proceso de ensuciamiento para que el Update deje de sumarle Alpha en este frame.
+        if (capaActiva != null)
         {
             capaEnsuciandose = null;
         }
-
-        // Si no es el caso de emergencia y la herramienta sigue siendo incorrecta, salimos
-        if (capaActiva == null)
+        else
         {
+            // Si la herramienta es incorrecta para el estado actual, salimos de inmediato
             Debug.Log("[EstadoDiente] " + gameObject.name + " herramienta incorrecta para estado " + estadoActual);
             return;
         }
 
-        // Nos aseguramos de que la capa esté visible para que el niño vea el progreso
+        // Aseguramos la visibilidad de la capa activa para procesar los cambios
         capaActiva.enabled = true;
 
         Color c = capaActiva.color;
@@ -217,7 +216,7 @@ public class EstadoDiente : MonoBehaviour
 
         Debug.Log("[EstadoDiente] " + gameObject.name + " alpha: " + c.a.ToString("F2") + " estado: " + estadoActual);
 
-        // Transición normal cuando el alpha llega a cero
+        // Transición fluida cuando la capa se limpia por completo
         if (c.a <= 0.05f)
         {
             c.a = 1f;
