@@ -719,7 +719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -264, y: 350}
+  m_AnchoredPosition: {x: -218, y: 394}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &702502590
@@ -1418,7 +1418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -633, y: 350}
+  m_AnchoredPosition: {x: -656, y: 394}
   m_SizeDelta: {x: 258.2403, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1552908030
@@ -2369,8 +2369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 292.99, y: 98}
-  m_SizeDelta: {x: 586.03, y: 554.7}
+  m_AnchoredPosition: {x: 534, y: -37}
+  m_SizeDelta: {x: 1164.7484, y: 1518.7365}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2048060008
 MonoBehaviour:
@@ -2395,10 +2395,11 @@ MonoBehaviour:
   m_text: " OBJETIVO\nLimpiar dientes del chico para evitar que la barra de dolor
     llegue al m\xE1ximo. Cada diente sucio llena la barra.\n\nLIMPIEZA\nCada diente
     tiene cuatro estados de suciedad y requiere una herramienta espec\xEDfica para
-    limpiarse:\n-Primer estado: Cepillo normal\n-Segundo estado: Cepillo con pasta
-    dental\n-Tercer estado: Algod\xF3n\n-Cuarto estado: Irrigador Dental\n\nCOMO
-    GANAR Y COMO PERDER\nPara ganar, resistir y mantener la barra de dolor bajo control
-    hasta que el tiempo llegue a cero; se pierde si la barra llega al 100%."
+    limpiarse, adem\xE1s cuando se limpian, apareceran burbujas:\n-Primer estado:
+    Cepillo normal\n-Segundo estado: Cepillo con pasta dental\n-Tercer estado: Algod\xF3n\n-Burbujas:
+    Irrigador Dental\n\nCOMO GANAR Y COMO PERDER\nPara ganar, resistir y mantener
+    la barra de dolor bajo control hasta que el tiempo llegue a cero; se pierde si
+    la barra llega al 100%."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 53823c48d6530054c80105efcc6f7e60, type: 2}
   m_sharedMaterial: {fileID: -5989255634453564251, guid: 53823c48d6530054c80105efcc6f7e60, type: 2}
@@ -2407,8 +2408,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2425,8 +2426,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 54
+  m_fontSizeBase: 54
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2464,7 +2465,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 16.2341, z: 0, w: 0}
+  m_margin: {x: 0, y: 16.2341, z: 0, w: -3.4531257}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
