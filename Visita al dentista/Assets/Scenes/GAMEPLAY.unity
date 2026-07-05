@@ -30120,7 +30120,6 @@ GameObject:
   - component: {fileID: 347113236}
   - component: {fileID: 347113233}
   - component: {fileID: 347113237}
-  - component: {fileID: 347113238}
   m_Layer: 9
   m_Name: Diente 20
   m_TagString: Untagged
@@ -30215,21 +30214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &347113238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347113231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &360483958
 GameObject:
   m_ObjectHideFlags: 0
@@ -30242,7 +30226,6 @@ GameObject:
   - component: {fileID: 360483963}
   - component: {fileID: 360483960}
   - component: {fileID: 360483964}
-  - component: {fileID: 360483965}
   m_Layer: 9
   m_Name: Diente 19
   m_TagString: Untagged
@@ -30337,21 +30320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &360483965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360483958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &366468839
 GameObject:
   m_ObjectHideFlags: 0
@@ -36504,7 +36472,6 @@ GameObject:
   - component: {fileID: 512475334}
   - component: {fileID: 512475331}
   - component: {fileID: 512475335}
-  - component: {fileID: 512475336}
   m_Layer: 9
   m_Name: Diente 21
   m_TagString: Untagged
@@ -36599,21 +36566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &512475336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512475329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &514780848
 GameObject:
   m_ObjectHideFlags: 0
@@ -46490,7 +46442,6 @@ GameObject:
   - component: {fileID: 579731397}
   - component: {fileID: 579731394}
   - component: {fileID: 579731398}
-  - component: {fileID: 579731399}
   m_Layer: 9
   m_Name: Diente 25
   m_TagString: Untagged
@@ -46585,21 +46536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &579731399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579731392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!61 &584081559
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -56716,7 +56652,6 @@ GameObject:
   - component: {fileID: 662386630}
   - component: {fileID: 662386627}
   - component: {fileID: 662386631}
-  - component: {fileID: 662386632}
   m_Layer: 9
   m_Name: Diente 30
   m_TagString: Untagged
@@ -56811,21 +56746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &662386632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 662386625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &704838103
 GameObject:
   m_ObjectHideFlags: 0
@@ -57108,7 +57028,6 @@ GameObject:
   - component: {fileID: 743035347}
   - component: {fileID: 743035344}
   - component: {fileID: 743035348}
-  - component: {fileID: 743035349}
   m_Layer: 9
   m_Name: Diente 17
   m_TagString: Untagged
@@ -57203,21 +57122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &743035349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 743035342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &754419382
 GameObject:
   m_ObjectHideFlags: 0
@@ -82247,7 +82151,6 @@ GameObject:
   - component: {fileID: 990228964}
   - component: {fileID: 990228961}
   - component: {fileID: 990228965}
-  - component: {fileID: 990228966}
   m_Layer: 9
   m_Name: Diente 26
   m_TagString: Untagged
@@ -82342,21 +82245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &990228966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990228959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &990436431
 GameObject:
   m_ObjectHideFlags: 0
@@ -82369,7 +82257,6 @@ GameObject:
   - component: {fileID: 990436436}
   - component: {fileID: 990436433}
   - component: {fileID: 990436437}
-  - component: {fileID: 990436438}
   m_Layer: 9
   m_Name: Diente 29
   m_TagString: Untagged
@@ -82464,21 +82351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &990436438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990436431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &991844479
 GameObject:
   m_ObjectHideFlags: 0
@@ -82614,7 +82486,6 @@ GameObject:
   - component: {fileID: 1020375996}
   - component: {fileID: 1020375993}
   - component: {fileID: 1020375997}
-  - component: {fileID: 1020375998}
   m_Layer: 9
   m_Name: Diente 16
   m_TagString: Untagged
@@ -82709,21 +82580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1020375998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020375991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &1035643138
 GameObject:
   m_ObjectHideFlags: 0
@@ -87837,7 +87693,6 @@ GameObject:
   - component: {fileID: 1160285376}
   - component: {fileID: 1160285373}
   - component: {fileID: 1160285377}
-  - component: {fileID: 1160285378}
   m_Layer: 9
   m_Name: Diente 23
   m_TagString: Untagged
@@ -87932,21 +87787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1160285378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160285371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &1196431002
 GameObject:
   m_ObjectHideFlags: 0
@@ -92792,7 +92632,6 @@ GameObject:
   - component: {fileID: 1296009068}
   - component: {fileID: 1296009065}
   - component: {fileID: 1296009069}
-  - component: {fileID: 1296009070}
   m_Layer: 9
   m_Name: Diente 15
   m_TagString: Untagged
@@ -92887,21 +92726,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1296009070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1296009063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!61 &1302279304
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -93281,7 +93105,6 @@ GameObject:
   - component: {fileID: 1404393101}
   - component: {fileID: 1404393098}
   - component: {fileID: 1404393102}
-  - component: {fileID: 1404393103}
   m_Layer: 9
   m_Name: Diente 22
   m_TagString: Untagged
@@ -93376,21 +93199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1404393103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404393096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!61 &1443568355
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -93551,7 +93359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configuracionDientes: []
   tiempoEsperaInicial: 1000
-  timerToChangeSprite: 5
+  timerToChangeSprite: 7000
 --- !u!1 &1508541372
 GameObject:
   m_ObjectHideFlags: 0
@@ -103610,7 +103418,6 @@ GameObject:
   - component: {fileID: 1603974527}
   - component: {fileID: 1603974524}
   - component: {fileID: 1603974528}
-  - component: {fileID: 1603974529}
   m_Layer: 9
   m_Name: Diente 24
   m_TagString: Untagged
@@ -103705,21 +103512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1603974529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603974522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &1604691553
 GameObject:
   m_ObjectHideFlags: 0
@@ -123827,7 +123619,6 @@ GameObject:
   - component: {fileID: 1812240716}
   - component: {fileID: 1812240713}
   - component: {fileID: 1812240717}
-  - component: {fileID: 1812240718}
   m_Layer: 9
   m_Name: Diente 18
   m_TagString: Untagged
@@ -123922,21 +123713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1812240718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812240711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &1812600108
 GameObject:
   m_ObjectHideFlags: 0
@@ -134030,7 +133806,6 @@ GameObject:
   - component: {fileID: 1895647933}
   - component: {fileID: 1895647930}
   - component: {fileID: 1895647934}
-  - component: {fileID: 1895647935}
   m_Layer: 9
   m_Name: Diente 27
   m_TagString: Untagged
@@ -134125,21 +133900,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1895647935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895647928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &1906392763
 GameObject:
   m_ObjectHideFlags: 0
@@ -154144,7 +153904,6 @@ GameObject:
   - component: {fileID: 2050497996}
   - component: {fileID: 2050497993}
   - component: {fileID: 2050497997}
-  - component: {fileID: 2050497998}
   m_Layer: 9
   m_Name: Diente 28
   m_TagString: Untagged
@@ -154239,21 +153998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2050497998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2050497991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &2056303864
 GameObject:
   m_ObjectHideFlags: 0
@@ -154370,7 +154114,7 @@ Transform:
   m_GameObject: {fileID: 3609477695805620903}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.1468, y: 1.3957, z: -0.017665967}
+  m_LocalPosition: {x: -10.14, y: 1.362, z: -0.017665967}
   m_LocalScale: {x: 0.43640888, y: 0.2600764, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -154420,7 +154164,6 @@ GameObject:
   - component: {fileID: 584081559}
   - component: {fileID: 7588793268982468827}
   - component: {fileID: 7588793268982468828}
-  - component: {fileID: 7588793268982468829}
   m_Layer: 9
   m_Name: Diente 2
   m_TagString: Untagged
@@ -154456,7 +154199,6 @@ GameObject:
   - component: {fileID: 6235594}
   - component: {fileID: 4108804654419334420}
   - component: {fileID: 4108804654419334421}
-  - component: {fileID: 4108804654419334422}
   m_Layer: 9
   m_Name: Diente 3
   m_TagString: Untagged
@@ -154625,7 +154367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &3125685619020461434
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -154684,7 +154426,6 @@ GameObject:
   - component: {fileID: 1443568355}
   - component: {fileID: 1443568363}
   - component: {fileID: 3609477695805620904}
-  - component: {fileID: 3609477695805620905}
   m_Layer: 9
   m_Name: Diente 1
   m_TagString: Untagged
@@ -154704,21 +154445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3609477695805620905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3609477695805620903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &3746534135787506537
 GameObject:
   m_ObjectHideFlags: 0
@@ -154731,7 +154457,6 @@ GameObject:
   - component: {fileID: 2165981108605643361}
   - component: {fileID: 8160763952709634019}
   - component: {fileID: 8160763952709634020}
-  - component: {fileID: 8160763952709634021}
   m_Layer: 9
   m_Name: Diente 6
   m_TagString: Untagged
@@ -154780,21 +154505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4108804654419334422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1911479828673261413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!4 &4383829662576351976
 Transform:
   m_ObjectHideFlags: 0
@@ -154919,7 +154629,6 @@ GameObject:
   - component: {fileID: 767557934}
   - component: {fileID: 5638975614279660447}
   - component: {fileID: 5638975614279660448}
-  - component: {fileID: 5638975614279660449}
   m_Layer: 9
   m_Name: Diente 8
   m_TagString: Untagged
@@ -154939,7 +154648,6 @@ GameObject:
   - component: {fileID: 116395870}
   - component: {fileID: 5638975614930828783}
   - component: {fileID: 5638975614930828784}
-  - component: {fileID: 5638975614930828785}
   m_Layer: 9
   m_Name: Diente 10
   m_TagString: Untagged
@@ -154959,7 +154667,6 @@ GameObject:
   - component: {fileID: 144205731}
   - component: {fileID: 5638975614903047468}
   - component: {fileID: 5638975614903047469}
-  - component: {fileID: 5638975614903047470}
   m_Layer: 9
   m_Name: Diente 13
   m_TagString: Untagged
@@ -154979,7 +154686,6 @@ GameObject:
   - component: {fileID: 2141447058}
   - component: {fileID: 5638975612905935163}
   - component: {fileID: 5638975612905935164}
-  - component: {fileID: 5638975612905935165}
   m_Layer: 9
   m_Name: Diente 12
   m_TagString: Untagged
@@ -154999,7 +154705,6 @@ GameObject:
   - component: {fileID: 1302279304}
   - component: {fileID: 5638975613745595953}
   - component: {fileID: 5638975613745595954}
-  - component: {fileID: 5638975613745595955}
   m_Layer: 9
   m_Name: Diente 9
   m_TagString: Untagged
@@ -155019,7 +154724,6 @@ GameObject:
   - component: {fileID: 1381013467}
   - component: {fileID: 5638975613666207076}
   - component: {fileID: 5638975613666207077}
-  - component: {fileID: 5638975613666207078}
   m_Layer: 9
   m_Name: Diente 11
   m_TagString: Untagged
@@ -155039,7 +154743,6 @@ GameObject:
   - component: {fileID: 1602317989}
   - component: {fileID: 5638975613445069846}
   - component: {fileID: 5638975613445069847}
-  - component: {fileID: 5638975613445069848}
   m_Layer: 9
   m_Name: Diente 14
   m_TagString: Untagged
@@ -155072,21 +154775,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5638975612905935165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5049072570132940952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!114 &5638975613445069846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155112,21 +154800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5638975613445069848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5049072570667877815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!114 &5638975613666207076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155152,21 +154825,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5638975613666207078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5049072570570259649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!114 &5638975613745595953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155192,21 +154850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5638975613745595955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5049072570365484946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!114 &5638975614279660447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155232,21 +154875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5638975614279660449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5049072568751008316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!114 &5638975614903047468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155272,21 +154900,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5638975614903047470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5049072569341889673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!114 &5638975614930828783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155312,21 +154925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5638975614930828785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5049072569171485772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!61 &5665733889294210385
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -155428,7 +155026,7 @@ Transform:
   m_GameObject: {fileID: 2264470874273718826}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.15, y: 1.39, z: 0.0510732}
+  m_LocalPosition: {x: -10.22, y: 1.39, z: 0.0510732}
   m_LocalScale: {x: 0.43902844, y: 0.25659376, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -155508,21 +155106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7588793268982468829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492601432152292269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!1 &7886157276641255009
 GameObject:
   m_ObjectHideFlags: 0
@@ -155535,7 +155118,6 @@ GameObject:
   - component: {fileID: 3125685619020461434}
   - component: {fileID: 7886157276641255010}
   - component: {fileID: 7886157276641255011}
-  - component: {fileID: 7886157276641255012}
   m_Layer: 9
   m_Name: Diente 7
   m_TagString: Untagged
@@ -155568,21 +155150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7886157276641255012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7886157276641255009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!212 &8061502688570753939
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -155650,7 +155217,6 @@ GameObject:
   - component: {fileID: 5665733889294210385}
   - component: {fileID: 8143335527390118006}
   - component: {fileID: 8143335527390118007}
-  - component: {fileID: 8143335527390118008}
   m_Layer: 9
   m_Name: Diente 4
   m_TagString: Untagged
@@ -155683,21 +155249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8143335527390118008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8143335527390118005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!4 &8160763952709634018
 Transform:
   m_ObjectHideFlags: 0
@@ -155739,21 +155290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8160763952709634021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3746534135787506537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!4 &9017480563978918588
 Transform:
   m_ObjectHideFlags: 0
@@ -155782,7 +155318,6 @@ GameObject:
   - component: {fileID: 5908096754081811315}
   - component: {fileID: 9085955296843325579}
   - component: {fileID: 9085955296843325580}
-  - component: {fileID: 9085955296843325581}
   m_Layer: 9
   m_Name: Diente 5
   m_TagString: Untagged
@@ -155815,21 +155350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed17ca4b3bdfac4a9e32efd1a7aee2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9085955296843325581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9085955296843325578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d953721b4173d42859cdb92d3602c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidadLatido: 1
-  intensidadHinchazon: 0.01
-  duracionAnimacion: 1.25
 --- !u!4 &9129877261858253073
 Transform:
   m_ObjectHideFlags: 0
