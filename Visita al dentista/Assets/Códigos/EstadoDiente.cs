@@ -35,9 +35,10 @@ public class EstadoDiente : MonoBehaviour
 
     public static event Action OnDienteLimpiado;
     public static event Action OnCualquierCambioDeEstado;
-
-    // EL CAMBIO AQUÍ: Una línea de teléfono directa solo para cuando sale una carie
     public static event Action OnAparicionDeCarie;
+
+    // >>> CAMBIO AQUÍ: Una bombilla que se enciende cuando se decide una carie nueva <<<
+    private bool debemostrarAnimacionDeCarieAlTerminar = false;
 
     void Update()
     {
@@ -54,6 +55,13 @@ public class EstadoDiente : MonoBehaviour
                 c.a = 1f;
                 capaEnsuciandose.color = c;
                 capaEnsuciandose = null;
+
+                // >>> CAMBIO AQUÍ: La caries ya es 100% visible en pantalla. ¡Ahora sí, que se hinche la boca! <<<
+                if (debemostrarAnimacionDeCarieAlTerminar)
+                {
+                    debemostrarAnimacionDeCarieAlTerminar = false; // Apagamos la bombilla
+                    OnAparicionDeCarie?.Invoke(); // Mandamos el grito al EfectoHinchazon
+                }
             }
             else
             {
@@ -92,6 +100,7 @@ public class EstadoDiente : MonoBehaviour
         if (cooldownTimer > 0f) return;
         if (capaEnsuciandose != null) return;
 
+        TipoEstado estadoAnterior = estadoActual;
         SpriteRenderer nuevaCapa = null;
         float dadoProbabilidad = UnityEngine.Random.Range(0f, 100f);
 
@@ -148,10 +157,10 @@ public class EstadoDiente : MonoBehaviour
 
         OnCualquierCambioDeEstado?.Invoke();
 
-        // EL CAMBIO AQUÍ: Si el estado final terminó siendo CARIE, avisamos exclusivamente al otro script
-        if (estadoActual == TipoEstado.CARIE)
+        // >>> CAMBIO AQUÍ: En lugar de gritar la animación de inmediato, encendemos la bombilla de aviso <<<
+        if (estadoActual == TipoEstado.CARIE && estadoAnterior != TipoEstado.CARIE)
         {
-            OnAparicionDeCarie?.Invoke();
+            debemostrarAnimacionDeCarieAlTerminar = true;
         }
     }
 
@@ -160,6 +169,7 @@ public class EstadoDiente : MonoBehaviour
         SpriteRenderer capaActiva = null;
         TipoEstado siguienteEstado = estadoActual;
 
+        // REGLA ESTRICTA: Emparejamos cada estado exclusivamente con su herramienta y su capa visual
         switch (estadoActual)
         {
             case TipoEstado.CARIE:
@@ -169,6 +179,7 @@ public class EstadoDiente : MonoBehaviour
                     siguienteEstado = TipoEstado.SARRO;
                 }
                 break;
+
             case TipoEstado.SARRO:
                 if (herramienta == TipoHerramienta.CEPILLO_CON_PASTA)
                 {
@@ -176,6 +187,7 @@ public class EstadoDiente : MonoBehaviour
                     siguienteEstado = TipoEstado.SUCIO;
                 }
                 break;
+
             case TipoEstado.SUCIO:
                 if (herramienta == TipoHerramienta.CEPILLO)
                 {
@@ -185,48 +197,44 @@ public class EstadoDiente : MonoBehaviour
                 break;
         }
 
-        if (estadoActual == TipoEstado.SARRO && herramienta == TipoHerramienta.CEPILLO_CON_PASTA && capaActiva == null)
+        // SI LA HERRAMIENTA NO CORRESPONDE AL ESTADO VISUAL ACTUAL, SE CANCELA TODO
+        if (capaActiva == null)
         {
-            Debug.LogWarning("[Salvavidas] Forzando limpieza de sarro en " + gameObject.name);
-            estadoActual = TipoEstado.SUCIO;
-            capaEnsuciandose = null;
-            cooldownTimer = COOLDOWN_TRAS_LIMPIEZA;
-            OnCualquierCambioDeEstado?.Invoke();
+            Debug.Log("[EstadoDiente] " + gameObject.name + " herramienta incorrecta (" + herramienta + ") para el estado real: " + estadoActual);
             return;
         }
 
-        if (capaActiva != null)
-        {
-            capaEnsuciandose = null;
-        }
-        else
-        {
-            Debug.Log("[EstadoDiente] " + gameObject.name + " herramienta incorrecta para estado " + estadoActual);
-            return;
-        }
-
+        // Si veníamos de un proceso de ensuciamiento, lo detenemos por completo al empezar a limpiar
+        capaEnsuciandose = null;
         capaActiva.enabled = true;
 
+        // Restamos el alpha gradualmente
         Color c = capaActiva.color;
         c.a -= cantidad;
         capaActiva.color = c;
 
-        Debug.Log("[EstadoDiente] " + gameObject.name + " alpha: " + c.a.ToString("F2") + " estado: " + estadoActual);
+        Debug.Log("[EstadoDiente] " + gameObject.name + " limpiando capa: " + capaActiva.name + " | Alpha restante: " + c.a.ToString("F2"));
 
+        // Cuando la mancha se elimina por completo (Alpha llega a 0)
         if (c.a <= 0.05f)
         {
             c.a = 1f;
             capaActiva.color = c;
-            capaActiva.enabled = false;
+            capaActiva.enabled = false; // Ocultamos por completo la capa que se limpió
 
+            // Hacemos el cambio físico de estado
             estadoActual = siguienteEstado;
             cooldownTimer = COOLDOWN_TRAS_LIMPIEZA;
 
-            Debug.Log("[EstadoDiente] " + gameObject.name + " TRANSICION a " + estadoActual + " | cooldown " + COOLDOWN_TRAS_LIMPIEZA + "s");
+            Debug.Log("[EstadoDiente] " + gameObject.name + " ¡Capa limpiada con éxito! Nuevo estado: " + estadoActual);
 
+            // Si el diente quedó reluciente, avisamos al contador general del juego
             if (estadoActual == TipoEstado.LIMPIO)
+            {
                 OnDienteLimpiado?.Invoke();
+            }
 
+            // Avisamos a la boca que hubo un cambio para actualizar la interfaz
             OnCualquierCambioDeEstado?.Invoke();
         }
     }

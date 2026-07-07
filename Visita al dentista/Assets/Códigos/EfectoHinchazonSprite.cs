@@ -3,74 +3,41 @@ using UnityEngine;
 
 public class EfectoHinchazonPorSprite : MonoBehaviour
 {
-    [Header("Configuración del Diente Asociado")]
-    [Tooltip("Arrastra aquí el SpriteRenderer del diente que quieres escuchar.")]
-    [SerializeField] private SpriteRenderer dienteAsociado;
-
     [Header("Configuración de la Animación")]
-    [Tooltip("Qué tan grande se estira el objeto (1.2 = 20% más grande).")]
+    [Tooltip("Qué tan grande se estira el objeto (1.15 = 15% más grande).")]
     [SerializeField] private float escalaMaxima = 1.15f;
     [Tooltip("Duración total del movimiento de hinchazón.")]
     [SerializeField] private float duracionHinchazon = 0.4f;
 
-    private EstadoDiente scriptEstadoDiente;
     private Vector3 escalaOriginal;
     private bool estaHinchando = false;
-    private TipoEstado ultimoEstadoConocido;
 
     void Awake()
     {
-        // Guardamos la escala original del objeto donde pongas ESTE script (ej: la cara o el cachete)
+        // Guardamos la escala original del objeto al iniciar el juego
         escalaOriginal = transform.localScale;
-
-        ObtenerScriptEstado();
     }
 
     void OnEnable()
     {
-        // Nos suscribimos al evento global
-        EstadoDiente.OnCualquierCambioDeEstado += VerificarCambioDeEstado;
-
-        if (scriptEstadoDiente != null)
-        {
-            ultimoEstadoConocido = scriptEstadoDiente.estadoActual;
-        }
+        // ESCUCHA EXCLUSIVA: Nos desconectamos del evento viejo y ruidoso.
+        // Ahora solo escuchamos cuando EstadoDiente confirma una CARIE real.
+        EstadoDiente.OnAparicionDeCarie += IniciarAnimacionSegura;
     }
 
     void OnDisable()
     {
-        EstadoDiente.OnCualquierCambioDeEstado -= VerificarCambioDeEstado;
+        // Nos desuscribimos de forma segura
+        EstadoDiente.OnAparicionDeCarie -= IniciarAnimacionSegura;
     }
 
-    private void ObtenerScriptEstado()
+    private void IniciarAnimacionSegura()
     {
-        if (dienteAsociado != null)
+        // Si no se está ejecutando la animación actualmente, la iniciamos
+        if (!estaHinchando)
         {
-            // Buscamos el script EstadoDiente dentro del SpriteRenderer que arrastraste
-            scriptEstadoDiente = dienteAsociado.GetComponent<EstadoDiente>();
+            StartCoroutine(AnimarHinchazonUnica());
         }
-    }
-
-    private void VerificarCambioDeEstado()
-    {
-        // Si el usuario cambió el diente en el inspector en caliente, volvemos a buscar el script
-        if (scriptEstadoDiente == null && dienteAsociado != null)
-        {
-            ObtenerScriptEstado();
-        }
-
-        if (scriptEstadoDiente == null) return;
-
-        // "¡Oye! El diente asociado cambió a CARIE, ¡muévete!"
-        if (scriptEstadoDiente.estadoActual == TipoEstado.CARIE && ultimoEstadoConocido != TipoEstado.CARIE)
-        {
-            if (!estaHinchando)
-            {
-                StartCoroutine(AnimarHinchazonUnica());
-            }
-        }
-
-        ultimoEstadoConocido = scriptEstadoDiente.estadoActual;
     }
 
     private IEnumerator AnimarHinchazonUnica()
@@ -79,7 +46,7 @@ public class EfectoHinchazonPorSprite : MonoBehaviour
         float tiempo = 0f;
         float mitadDuracion = duracionHinchazon / 2f;
 
-        // 1. FASE CRECER: El objeto donde está este script se infla un poco
+        // 1. FASE CRECER: El objeto se infla un poco
         while (tiempo < mitadDuracion)
         {
             tiempo += Time.deltaTime;
@@ -90,7 +57,7 @@ public class EfectoHinchazonPorSprite : MonoBehaviour
 
         tiempo = 0f;
 
-        // 2. FASE ACHICAR: Vuelve a su tamaño normal
+        // 2. FASE ACHICAR: Vuelve suavemente a su escala normal
         while (tiempo < mitadDuracion)
         {
             tiempo += Time.deltaTime;
@@ -99,7 +66,7 @@ public class EfectoHinchazonPorSprite : MonoBehaviour
             yield return null;
         }
 
-        // Nos aseguramos de dejarlo exacto
+        // Aseguramos que la escala quede exactamente en su tamaño de origen
         transform.localScale = escalaOriginal;
         estaHinchando = false;
     }

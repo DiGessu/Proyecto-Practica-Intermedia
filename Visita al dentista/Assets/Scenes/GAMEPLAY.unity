@@ -5334,7 +5334,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -3.7411697, y: -2.4789028}
+  m_Offset: {x: -3.6814852, y: -2.4240136}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5344,7 +5344,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.575418, y: 0.8324528}
+  m_Size: {x: 0.45604897, y: 0.5763025}
   m_EdgeRadius: 0
 --- !u!1 &123243804
 GameObject:
@@ -155404,8 +155404,8 @@ Transform:
   m_GameObject: {fileID: 2264470874273718826}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11, y: -0.77, z: 0.0510732}
-  m_LocalScale: {x: 0.43902844, y: 0.25659376, z: 0}
+  m_LocalPosition: {x: -0.0725, y: -0.7838, z: -0.017665967}
+  m_LocalScale: {x: 0.4343107, y: 0.26145482, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1114402459213052520}
@@ -155555,7 +155555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4daf70f16e56c54459aa47d3238f2cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escalaMaxima: 0.77
+  escalaMaxima: 1.2
   duracionHinchazon: 0.4
 --- !u!212 &8061502688570753939
 SpriteRenderer:
@@ -155624,7 +155624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3507744f8c511814d85729d4746fe347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dienteAsociado: {fileID: 8061502688570753939}
   escalaMaxima: 1.2
   duracionHinchazon: 0.4
 --- !u!1 &8143335527390118005
